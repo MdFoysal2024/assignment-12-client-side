@@ -2,24 +2,28 @@ import { TiShoppingCart } from "react-icons/ti";
 import { Link } from "react-router-dom";
 import logo from '../../../assets/blood-logo.png'
 import { TfiShoppingCart } from "react-icons/tfi";
-import { IoPersonCircleSharp } from "react-icons/io5";
-import { useState } from "react";
+import { IoPersonCircleOutline, IoPersonCircleSharp } from "react-icons/io5";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
+import { CiLogout } from "react-icons/ci";
+import { MdDashboardCustomize, MdEmail } from "react-icons/md";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 const Navbar = () => {
 
-    // const { user, logOut } = useContext(AuthContext);
-    // //console.log(user.email);
+    const { user, logOut } = useContext(AuthContext);
+    //console.log(user.email);
     // const [isAdmin] = useAdmin();
     // const [cart] = useCart();
-    const [user, setUser] = useState(null)
 
-    const handleLogOut = () => {
-        // logOut()
-        //     .then(() => { })
-        //     .catch(error => {
-        //         console.log(error);
-        //     })
-    }
+
+    // const handleLogOut = () => {
+    //     logOut()
+    //         .then(() => { })
+    //         .catch(error => {
+    //             console.log(error);
+    //         })
+    // }
 
 
     const navOptions = <>
@@ -49,14 +53,9 @@ const Navbar = () => {
             {
                 user ? <>
 
-                    <button onClick={handleLogOut}
-                        className="  font-bold">
-                        <img className='rounded-full w-10 npm border-2 run dev' src={user?.photoURL} alt="" />
-                    </button>
+                    <li><Link to='/funding' className='hover:underline text-lg font-semibold'>Funding</Link></li>
                 </> : <>
-                    <li> <Link to='/login'>
-                        <IoPersonCircleSharp className="text-3xl" />
-                    </Link></li>
+
                 </>
             }
         </div>
@@ -124,11 +123,57 @@ const Navbar = () => {
 
 
 
-                    {/* <div>
-                        <Link to='/login'>
-                            <button className='text-2xl p-2 mx-2 border-2  border-gray-500 rounded-full'><IoPersonCircleSharp /></button>
-                        </Link>
-                    </div> */}
+                    {
+                        user && user?.email ?
+
+
+                            <>
+                                <div>
+                                    {/* className="tooltip" data-tip="Home" */}
+                                    {/* Open the modal using document.getElementById('ID').showModal() method */}
+                                    <button className="" onClick={() => document.getElementById('my_modal_5').showModal()}>
+                                        <img className="w-12  mt-2 border-2 border-gray-500 rounded-full  " src={user?.photoURL} alt="" />
+                                    </button>
+
+
+                                    <dialog id="my_modal_5" className=" modal flex  justify-center left-auto right-16 top-6  w-[280px] modal-top ">
+                                        <div className="bg-red-300 px-8 py-12">
+
+                                            <img className="w-20 mb-6 border-2  border-gray-500 mx-auto rounded-full" src={user?.photoURL} alt="" />
+
+                                            <div className=" flex flex-col space-y-1">
+                                                <h3 className="font-bold text-left text-black text-lg flex items-center gap-2"><IoPersonCircleOutline />{user?.displayName}</h3>
+
+                                                <p className=" text-center text-black flex items-center gap-2"><MdEmail />{user?.email}</p>
+
+
+                                                <Link to="/dashboard">
+                                                    <p className="text-black flex gap-2 items-center"><MdDashboardCustomize />Dashboard</p>
+                                                </Link>
+
+                                                <Link to="/login">
+                                                    <button onClick={logOut} className='text-black flex items-center gap-2'><CiLogout className="text-2xl font-bold" />Log-Out</button>
+                                                </Link>
+
+                                                <div className="text-left">
+                                                    <form method="dialog">
+                                                        {/* if there is a button in form, it will close the modal */}
+
+                                                        <button className="text-black   flex items-center gap-2 "><AiFillCloseCircle />Close</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </dialog>
+                                </div>
+                            </>
+
+                            :
+                            (<Link to='/login' className=' text-5xl text-red-600 font-bold rounded-full '><IoPersonCircleOutline /></Link>)
+                    }
 
 
                 </div>
