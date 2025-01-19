@@ -23,9 +23,9 @@ const Navbar = () => {
 
 
     const navOptions = <>
-        <li><Link to='/' className='hover:underline text-lg'>Home</Link></li>
-        <li><Link to='/donationRequests' className='hover:underline text-lg'>Donation Requests</Link></li>
-        <li><Link to='/blog' className='hover:underline text-lg'>Blog</Link></li>
+        <li><Link to='/' className='hover:underline text-lg font-semibold'>Home</Link></li>
+        <li><Link to='/donationRequests' className='hover:underline text-lg font-semibold'>Donation Requests</Link></li>
+        <li><Link to='/blog' className='hover:underline text-lg font-semibold'>Blog</Link></li>
 
 
         {
