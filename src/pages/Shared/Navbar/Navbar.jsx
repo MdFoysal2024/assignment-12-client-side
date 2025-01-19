@@ -14,16 +14,13 @@ const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
     //console.log(user.email);
     // const [isAdmin] = useAdmin();
-    // const [cart] = useCart();
+
+    //for test--->
+    const [isAdmin, setIsAdmin] = useState(null);
 
 
-    // const handleLogOut = () => {
-    //     logOut()
-    //         .then(() => { })
-    //         .catch(error => {
-    //             console.log(error);
-    //         })
-    // }
+ 
+
 
 
     const navOptions = <>

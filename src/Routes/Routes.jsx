@@ -7,13 +7,19 @@ import SearchPage from "../pages/SearchPage/SearchPage";
 import BlogPage from "../pages/BlogPage/BlogPage";
 import FundingPage from "../pages/FundingPage/FundingPage";
 import DonationRequests from "../pages/DonationRequests/DonationRequests";
+import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../Layout/Dashboard";
+import DonorHome from "../pages/DonarPage/DonorHome";
+import CreateDonationRequest from "../pages/DonarPage/CreateDonationRequest";
+import MyDonationRequests from "../pages/DonarPage/MyDonationRequests";
 
 
 export const router = createBrowserRouter([
+    //Main routes section--------->
     {
         path: "/",
         element: <Main></Main>,
-        children:[
+        children: [
             {
                 path: '/',
                 element: <Home></Home>
@@ -21,7 +27,7 @@ export const router = createBrowserRouter([
             {
                 path: 'login',
                 element: <Login></Login>
-            
+
             },
             {
                 path: 'signUp',
@@ -38,7 +44,7 @@ export const router = createBrowserRouter([
             {
                 path: 'blog',
                 element: <BlogPage></BlogPage>
-            
+
             },
             {
                 path: 'donationRequests',
@@ -46,4 +52,38 @@ export const router = createBrowserRouter([
             }
         ]
     },
+
+    //Dashboard routes section--------->
+    {
+        path: "dashboard",
+        element: (
+            <PrivateRoute>
+                <Dashboard />
+            </PrivateRoute>
+        )
+        ,
+        children: [
+            //normal user routes---->
+            {
+                path: 'donorHome',
+                element: <DonorHome></DonorHome>
+            },
+            {
+                path: 'createDonationRequest',
+                element: <CreateDonationRequest></CreateDonationRequest>
+            },
+            {
+                path: 'myDonationRequest',
+                element: <MyDonationRequests></MyDonationRequests>
+            },
+
+
+            //only Volunteer routes---->
+
+
+
+            //only Admin routes---->
+
+        ]
+    }
 ]);
