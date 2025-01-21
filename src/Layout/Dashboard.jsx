@@ -13,10 +13,10 @@ const Dashboard = () => {
     const { user } = useAuth();
 
     //for test--->
-    //const [isAdmin, setIsAdmin] = useState(null);
-    const [isAdmin, setIsAdmin] = useState('Admin');
+    const [isAdmin, setIsAdmin] = useState(null);
+    //const [isAdmin, setIsAdmin] = useState('Admin');
     
-    const [admin, setAdmin] = useState('Admin');
+    const [admin, setAdmin] = useState('Donor');
 
     return (
         <div className='flex container mx-auto'>
@@ -27,7 +27,7 @@ const Dashboard = () => {
                     <h3 className='text-2xl font-bold'></h3>
                     <img className="w-24 mx-auto rounded-full my-4 border-4 " src={user?.photoURL} alt="" />
                     <p className='uppercase text-lg font-bold'>{user?.displayName}</p>
-                    <p className=''>Email: {user?.email}</p>
+                    <p className=''> {user?.email}</p>
                     <p className='bg-red-100 w-36 mx-auto text-2xl my-2 font-bold text-red-600 p-2 '> {admin}</p>
                 </div>
 
@@ -67,7 +67,7 @@ const Dashboard = () => {
                                     <NavLink to="/dashboard/myDonationRequest">   <BiSolidDonateBlood className='text-2xl' /> My Donation Request</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/dashboard/paymentHistory">   <FaCalendar className='text-xl' />Donation History</NavLink>
+                                    <NavLink to="/dashboard/paymentHistory">   <FaCalendar className='text-xl' />Funding History</NavLink>
                                 </li>
 
 

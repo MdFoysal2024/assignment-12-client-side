@@ -9,7 +9,6 @@ export const axiosPublic = axios.create({
 
 const useAxiosPublic = () => {
 
-
     return axiosPublic;
 };
 
