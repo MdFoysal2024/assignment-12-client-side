@@ -42,14 +42,14 @@ const Dashboard = () => {
                                 </li>
 
                                 <li>
-                                    <NavLink to="/dashboard/manageItems">   <FaList className='text-xl' />Manage Items</NavLink>
+                                    <NavLink to="/dashboard/all-blood-donation-request">   <FaList className='text-xl' />All Blood Donation Request</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/dashboard/bookings">   <MdBookmarks className='text-xl' />Content Management</NavLink>
+                                    <NavLink to="/dashboard/content-management">   <MdBookmarks className='text-xl' />Content Management</NavLink>
                                 </li>
 
                                 <li>
-                                    <NavLink to="/dashboard/users">   <FaUsers className='text-2xl' />All Users</NavLink>
+                                    <NavLink to="/dashboard/all-users">   <FaUsers className='text-2xl' />All Users</NavLink>
                                 </li>
 
                             </>

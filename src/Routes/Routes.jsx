@@ -12,6 +12,10 @@ import Dashboard from "../Layout/Dashboard";
 import DonorHome from "../pages/DonarPage/DonorHome";
 import CreateDonationRequest from "../pages/DonarPage/CreateDonationRequest";
 import MyDonationRequests from "../pages/DonarPage/MyDonationRequests";
+import AdminHome from "../pages/AdminPage/AdminHome";
+import AllUsers from "../pages/AdminPage/AllUsers";
+import ContentManagement from "../pages/AdminPage/ContentManagement";
+import AllBloodDonationRequest from "../pages/AdminPage/AllBloodDonationRequest";
 
 
 export const router = createBrowserRouter([
@@ -83,7 +87,22 @@ export const router = createBrowserRouter([
 
 
             //only Admin routes---->
-
+            {
+                path: 'adminHome',
+                element: <AdminHome></AdminHome>
+            },
+            {
+                path: 'all-users',
+                element: <AllUsers></AllUsers>
+            },
+            {
+                path: 'content-management',
+                element: <ContentManagement></ContentManagement>
+            },
+            {
+                path: 'all-blood-donation-request',
+                element: <AllBloodDonationRequest></AllBloodDonationRequest>
+            },
         ]
     }
 ]);
