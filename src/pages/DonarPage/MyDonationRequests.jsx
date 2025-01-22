@@ -4,6 +4,7 @@ import useDonationRequest from "../../hooks/useDonationRequest";
 import { format } from 'date-fns';
 import { BiEdit } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { BsEye } from "react-icons/bs";
 
 const MyDonationRequests = () => {
 
@@ -80,13 +81,22 @@ const MyDonationRequests = () => {
 
                                 <th>
                                     <Link to={`/dashboard/editDonationRequest/${request._id}`}>
-                                    <button
-                                        
-                                        className=" p-3 text-xl text-red-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><BiEdit /></button>
+                                        <button
+
+                                            className=" p-3 text-xl text-red-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><BiEdit /></button>
                                     </Link>
                                     <button
                                         onClick={() => handleDelete(request._id)}
                                         className=" ml-2 p-3 text-xl text-red-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><RiDeleteBin2Fill /></button>
+
+
+                                    <Link to={`/dashboard/donationRequestDetails/${request._id}`}>
+                                        <button
+
+                                            className=" p-3 text-xl text-red-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><BsEye /></button>
+                                    </Link>
+
+
                                 </th>
                             </tr>)
                         }

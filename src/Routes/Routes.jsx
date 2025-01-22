@@ -17,6 +17,7 @@ import AllUsers from "../pages/AdminPage/AllUsers";
 import ContentManagement from "../pages/AdminPage/ContentManagement";
 import AllBloodDonationRequest from "../pages/AdminPage/AllBloodDonationRequest";
 import EditDonationRequest from "../pages/DonarPage/EditDonationRequest";
+import DonationRequestDetails from "../pages/DonarPage/DonationRequestDetails";
 
 
 export const router = createBrowserRouter([
@@ -85,6 +86,12 @@ export const router = createBrowserRouter([
                 
                 path: 'editDonationRequest/:id',
                 element: <EditDonationRequest></EditDonationRequest>,
+                loader: ({ params }) => fetch(`http://localhost:5000/donationRequest/${params.id}`)
+            },
+            {
+                
+                path: 'donationRequestDetails/:id',
+                element: <DonationRequestDetails></DonationRequestDetails>,
                 loader: ({ params }) => fetch(`http://localhost:5000/donationRequest/${params.id}`)
             },
 
