@@ -1,13 +1,18 @@
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
- import DatePicker from 'react-datepicker';
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const CreateDonationRequest = () => {
 
     const { user } = useAuth();
     const [startDate, setStartDate] = useState(new Date());
+    const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
 
     const upazilas = [
         'Ajmiriganj', 'Atpara', 'Austagram', 'Babuganj', 'Bagerhat Sadar', 'Bajitpur', 'Bakerganj', 'Banaripara', 'Keranigonj', ' Indurkani', 'Kolabagan', 'Shahabag', 'Banani',
@@ -125,23 +130,42 @@ const CreateDonationRequest = () => {
 
 
 
-        console.log(name, email, recipient_name, address,start_Date, time, blood_group, hospital_name, upazila, district, request_message)
+        console.log(name, email, recipient_name, address, start_Date, time, blood_group, hospital_name, upazila, district, request_message)
 
-        const formData= {
-            name, 
-            email, 
-            recipient_name, 
+        const formData = {
+            name,
+            email,
+            recipient_name,
             address,
-            start_Date, 
-            time, 
-            blood_group, 
-            hospital_name, 
-            upazila, 
-            district, 
+            start_Date,
+            time,
+            blood_group,
+            hospital_name,
+            upazila,
+            district,
             request_message,
-            status:'pending'
+            status: 'pending'
         }
         console.log(formData);
+
+
+        axiosPublic.post('/createDonationRequest', formData)
+
+            .then(res => {
+                if (res.data.insertedId) {
+                    console.log('User data added to Database');
+
+                    Swal.fire({
+                        title: 'Donation Request',
+                        text: 'Donation Request Created Successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Thank You'
+                    });
+
+                    navigate("/dashboard/myDonationRequest");
+                }
+            })
+
 
     }
 

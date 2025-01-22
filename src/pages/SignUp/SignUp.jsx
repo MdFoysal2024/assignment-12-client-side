@@ -198,7 +198,7 @@ const SignUp = () => {
                             ...user, displayName: name,
                             photoURL: photoURL
                         });
-                        navigate("/");
+                       // navigate("/");
                         const userInfo = {
                             name: name,
                             email: email,
