@@ -16,10 +16,10 @@ const Navbar = () => {
     // const [isAdmin] = useAdmin();
 
     //for test--->
-    const [isAdmin, setIsAdmin] = useState(null);
+    const [isAdmin, setIsAdmin] = useState('null');
 
 
- 
+
 
 
 
@@ -143,10 +143,25 @@ const Navbar = () => {
 
                                                 <p className=" text-center text-black flex items-center gap-2"><MdEmail />{user?.email}</p>
 
+                                                <div>
+                                                    {
+                                                        isAdmin ? <>
+                                                            <Link to="/dashboard/adminHome">
+                                                                <p className="text-black flex gap-2 items-center"><MdDashboardCustomize />Dashboard</p>
+                                                            </Link>
+                                                        </>
+                                                            :
+                                                            <>
+                                                                <Link to="/dashboard/donorHome">
+                                                                    <p className="text-black flex gap-2 items-center"><MdDashboardCustomize />Dashboard</p>
+                                                                </Link>
+                                                            </>
+                                                            
+                                                    }
+                                                </div>
 
-                                                <Link to="/dashboard">
-                                                    <p className="text-black flex gap-2 items-center"><MdDashboardCustomize />Dashboard</p>
-                                                </Link>
+
+
 
                                                 <Link to="/login">
                                                     <button onClick={logOut} className='text-black flex items-center gap-2'><CiLogout className="text-2xl font-bold" />Log-Out</button>

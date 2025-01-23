@@ -18,6 +18,7 @@ import ContentManagement from "../pages/AdminPage/ContentManagement";
 import AllBloodDonationRequest from "../pages/AdminPage/AllBloodDonationRequest";
 import EditDonationRequest from "../pages/DonarPage/EditDonationRequest";
 import DonationRequestDetails from "../pages/DonarPage/DonationRequestDetails";
+import AddBlog from "../pages/AdminPage/AddBlog";
 
 
 export const router = createBrowserRouter([
@@ -45,7 +46,8 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'funding',
-                element: <FundingPage></FundingPage>
+                element: <PrivateRoute><FundingPage></FundingPage></PrivateRoute>
+               
             },
             {
                 path: 'blog',
@@ -116,6 +118,10 @@ export const router = createBrowserRouter([
             {
                 path: 'all-blood-donation-request',
                 element: <AllBloodDonationRequest></AllBloodDonationRequest>
+            },
+            {
+                path: 'addBlog',
+                element: <AddBlog></AddBlog>
             },
         ]
     }

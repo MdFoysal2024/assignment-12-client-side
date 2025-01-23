@@ -13,7 +13,7 @@ const AdminHome = () => {
             </div>
 
 
-            Donor Home page
+            Admin Home page
         </div>
     );
 };

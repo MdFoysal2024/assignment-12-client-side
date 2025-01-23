@@ -13,7 +13,7 @@ const Dashboard = () => {
     const { user } = useAuth();
 
     //for test--->
-    const [isAdmin, setIsAdmin] = useState(null);
+    const [isAdmin, setIsAdmin] = useState('null');
     //const [isAdmin, setIsAdmin] = useState('Admin');
     
     const [admin, setAdmin] = useState('Donor');

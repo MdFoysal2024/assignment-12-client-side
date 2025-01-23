@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { BiEdit } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { BsEye } from "react-icons/bs";
+import { useState } from "react";
 
 const MyDonationRequests = () => {
 
@@ -17,95 +18,109 @@ const MyDonationRequests = () => {
     //({donationRequest.length})
     return (
         <div className='p-24'>
-            My All Donation Requests ({donationRequest.length})
+            {/* My All Donation Requests ({donationRequest.length}) */}
+
+            <div>
+                {
+                    donationRequest.length ?
+                        <> <div className="overflow-x-auto my-8">
+                            <table className="table">
+                                {/* head */}
+                                <thead className="bg-red-600 text-lg text-white ">
+                                    <tr className="">
+                                        <th className="pl-6">
+                                            SN
+                                        </th>
+                                        <th>Name</th>
+                                        <th>Location</th>
+                                        <th>Donation Date</th>
+                                        <th>Donation Time</th>
+                                        <th>Blood Group</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
 
 
-            <div className="overflow-x-auto my-8">
-                <table className="table">
-                    {/* head */}
-                    <thead className="bg-red-600 text-lg text-white ">
-                        <tr className="">
-                            <th className="pl-6">
-                                SN
-                            </th>
-                            <th>Name</th>
-                            <th>Location</th>
-                            <th>Donation Date</th>
-                            <th>Donation Time</th>
-                            <th>Blood Group</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                                    {
+                                        donationRequest.map((request, idx) => <tr key={request._id}>
+                                            <th>
+                                                {idx + 1}
+                                            </th>
+
+                                            <td>
+                                                <p className="font-bold">
+
+                                                    {request.recipient_name}
+                                                </p>
+
+                                            </td>
+                                            <td>
+                                                {request.upazila},{request.district}
+
+                                            </td>
+                                            <td>
+                                                {format(new Date(request.start_Date
+                                                ), 'P')}
 
 
+                                            </td>
+                                            <td>
+                                                {request.time}
 
-                        {
-                            donationRequest.map((request, idx) => <tr key={request._id}>
-                                <th>
-                                    {idx + 1}
-                                </th>
+                                            </td>
+                                            <td>
+                                                {request.blood_group}
 
-                                <td>
-                                    <p className="font-bold">
-
-                                        {request.recipient_name}
-                                    </p>
-
-                                </td>
-                                <td>
-                                    {request.upazila},{request.district}
-
-                                </td>
-                                <td>
-                                    {format(new Date(request.start_Date
-                                    ), 'P')}
+                                            </td>
+                                            <td className="text-red-600 font-bold   text-center">
+                                                <p className="bg-red-100 py-1 px-4 rounded-lg">{request.status}</p>
 
 
-                                </td>
-                                <td>
-                                    {request.time}
+                                            </td>
 
-                                </td>
-                                <td>
-                                    {request.blood_group}
+                                            <th>
+                                                <Link to={`/dashboard/editDonationRequest/${request._id}`}>
+                                                    <button
 
-                                </td>
-                                <td className="text-red-600 font-bold   text-center">
-                                    <p className="bg-red-100 py-1 px-4 rounded-lg">{request.status}</p>
-
-
-                                </td>
-
-                                <th>
-                                    <Link to={`/dashboard/editDonationRequest/${request._id}`}>
-                                        <button
-
-                                            className=" p-3 text-xl text-red-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><BiEdit /></button>
-                                    </Link>
-                                    <button
-                                        onClick={() => handleDelete(request._id)}
-                                        className=" ml-2 p-3 text-xl text-red-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><RiDeleteBin2Fill /></button>
+                                                        className=" p-3 text-xl text-red-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><BiEdit /></button>
+                                                </Link>
+                                                <button
+                                                    onClick={() => handleDelete(request._id)}
+                                                    className=" ml-2 p-3 text-xl text-red-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><RiDeleteBin2Fill /></button>
 
 
-                                    <Link to={`/dashboard/donationRequestDetails/${request._id}`}>
-                                        <button
+                                                <Link to={`/dashboard/donationRequestDetails/${request._id}`}>
+                                                    <button
 
-                                            className=" p-3 text-xl text-red-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><BsEye /></button>
-                                    </Link>
-
-
-                                </th>
-                            </tr>)
-                        }
+                                                        className=" p-3 text-xl text-red-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><BsEye /></button>
+                                                </Link>
 
 
-                    </tbody>
+                                            </th>
+                                        </tr>)
+                                    }
 
-                </table>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                        </>
+                        :
+                        <div className="text-center text-2xl font-bold">
+                            No data  Available Here...
+                        </div>
+
+                }
             </div>
+
+
+
+
+
         </div>
     );
 };

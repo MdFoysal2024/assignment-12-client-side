@@ -206,8 +206,8 @@ const SignUp = () => {
                             bloodGroup: bloodGroup,
                             upazila: upazila,
                             district: district,
-                            status: 'active',
-                            role: 'donor'
+                            status: 'Active',
+                            role: 'Donor'
                         }
 
                         axiosPublic.post('/users', userInfo)
