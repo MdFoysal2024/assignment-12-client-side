@@ -5,7 +5,7 @@ import { FaCalendar, FaList, FaUsers } from "react-icons/fa6";
 import { IoIosContacts } from "react-icons/io";
 import { MdBookmarks } from "react-icons/md";
 import { PiGitPullRequestBold } from "react-icons/pi";
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 
@@ -15,8 +15,8 @@ const Dashboard = () => {
     //for test--->
     const [isAdmin, setIsAdmin] = useState('null');
     //const [isAdmin, setIsAdmin] = useState('Admin');
-    
-    const [admin, setAdmin] = useState('Donor');
+
+    const [admin, setAdmin] = useState('View Profile');
 
     return (
         <div className='flex container mx-auto'>
@@ -28,7 +28,11 @@ const Dashboard = () => {
                     <img className="w-24 mx-auto rounded-full my-4 border-4 " src={user?.photoURL} alt="" />
                     <p className='uppercase text-lg font-bold'>{user?.displayName}</p>
                     <p className=''> {user?.email}</p>
-                    <p className='bg-red-100 w-36 mx-auto text-2xl my-2 font-bold text-red-600 p-2 '> {admin}</p>
+
+                    <Link to='/'>
+                        <p className='bg-red-100 w-36 mx-auto text-xl my-2 font-bold text-red-600 p-2 '> {admin}</p>
+                    </Link>
+
                 </div>
 
                 <ul className='menu font-semibold text-white '>

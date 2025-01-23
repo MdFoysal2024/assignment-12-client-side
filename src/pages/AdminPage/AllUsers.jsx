@@ -16,10 +16,26 @@ const AllUsers = () => {
 
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/users')
-            return res.data;
-        }
 
+            //const res = await axiosSecure.get('/users')
+
+            // const res = await axiosSecure.get('/users', {
+            //     //---Token কে cookies এ না রেখে localStorage এ রাখা হয়েছে-->
+
+            //     //headers --> এই মেথড কে axios থেকে আনা হয়েছে  এবং এখন থেকে     headers দিয়ে Token কে সার্ভারে পাঠানো হয়েছে।   localStorage এ টোকেন কে  পাঠাতে/রাখতে হলে headers এর মাধ্যমেই পাঠাতে হবে।
+
+            //     headers: {
+            //         authorization: `Bearer ${localStorage.getItem('Access-Token')}`
+            //     }
+            // });
+
+
+            const res = await axiosSecure.get('/users');
+            //headers --> মেথড কে axiosSecure এর ভিতরে রাখা হয়েছে
+            // এখানে const res এ headers এর ভিতরে authorization টোকেন না রেখে axiosSecure এর ভিতরে রেখেছি যাতে সব জায়গা হতে পাওয়া যায় ।
+            return res.data;
+
+        }
 
     })
 
@@ -80,7 +96,7 @@ const AllUsers = () => {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: `${user.name} is an Admin Now!`,
+                        title: `${user.name} is an Active Now!`,
                         showConfirmButton: false,
                         timer: 1500
                     });
@@ -101,7 +117,7 @@ const AllUsers = () => {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: `${user.name} is an Admin Now!`,
+                        title: `${user.name} is Blocked Now!`,
                         showConfirmButton: false,
                         timer: 1500
                     });
@@ -160,12 +176,12 @@ const AllUsers = () => {
 
 
                                         <th>
-                                            {user.role === 'Admin' ? 
-                                            <p className="text-xl text-green-600">{user.role}</p> : 
-                                            user.role === 'Volunteer' ? 
-                                            <p className="text-xl text-orange-500">{user.role}</p> 
-                                            : 
-                                            <p className="text-xl text-red-600 ">{user.role}</p>
+                                            {user.role === 'Admin' ?
+                                                <p className="text-xl text-green-600">{user.role}</p> :
+                                                user.role === 'Volunteer' ?
+                                                    <p className="text-xl text-orange-500">{user.role}</p>
+                                                    :
+                                                    <p className="text-xl text-red-600 ">{user.role}</p>
 
                                             }
                                         </th>
@@ -178,14 +194,14 @@ const AllUsers = () => {
 
                                             <div className="join join-vertical lg:join-horizontal">
 
-                                            {user.status === 'Active' ?
+                                                {user.status === 'Active' ?
                                                     <button
-                                                    onClick={() => handleMakeBlocked(user)}
+                                                        onClick={() => handleMakeBlocked(user)}
                                                         className="btn bg-red-300 join-item" >Block</button>
                                                     :
                                                     <button
-                                                       
-                                                        className="btn bg-red-300 join-item" disabled>Block</button>
+                                                        onClick={() => handleMakeUnblocked(user)}
+                                                        className="btn bg-red-300 join-item" >Unblocked</button>
 
                                                 }
 
@@ -215,7 +231,7 @@ const AllUsers = () => {
 
                                                 }
 
-                                                {user.status === 'Blocked' ?
+                                                {/* {user.status === 'Blocked' ?
                                                     <button
                                                     onClick={() => handleMakeUnblocked(user)}
                                                         className="btn bg-red-300 join-item" >Unblocked</button>
@@ -224,7 +240,7 @@ const AllUsers = () => {
                                                    
                                                         className="btn bg-red-300 join-item" disabled>Unblocked</button>
 
-                                                }
+                                                } */}
 
 
                                             </div>
