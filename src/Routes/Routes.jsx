@@ -19,6 +19,8 @@ import AllBloodDonationRequest from "../pages/AdminPage/AllBloodDonationRequest"
 import EditDonationRequest from "../pages/DonarPage/EditDonationRequest";
 import DonationRequestDetails from "../pages/DonarPage/DonationRequestDetails";
 import AddBlog from "../pages/AdminPage/AddBlog";
+import UserProfile from "../pages/UserProfile/UserProfile";
+import UpdateProfile from "../pages/UserProfile/UpdateProfile";
 
 
 export const router = createBrowserRouter([
@@ -71,6 +73,17 @@ export const router = createBrowserRouter([
         )
         ,
         children: [
+
+            {
+                path: 'userProfile',
+                element: <UserProfile></UserProfile>
+            },
+            {
+                path: 'updateProfile',
+                element: <UpdateProfile></UpdateProfile>
+            },
+
+
             //normal user routes---->
             {
                 path: 'donorHome',

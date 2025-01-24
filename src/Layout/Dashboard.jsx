@@ -29,7 +29,7 @@ const Dashboard = () => {
                     <p className='uppercase text-lg font-bold'>{user?.displayName}</p>
                     <p className=''> {user?.email}</p>
 
-                    <Link to='/'>
+                    <Link to='/dashboard/userProfile'>
                         <p className='bg-red-100 w-36 mx-auto text-xl my-2 font-bold text-red-600 p-2 '> {admin}</p>
                     </Link>
 
