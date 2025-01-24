@@ -3,15 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import useUserInfo from '../../hooks/useUserInfo';
+import { imageUpload } from '../../api/utils';
+import Swal from 'sweetalert2';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const UpdateProfile = () => {
 
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
-    const { user, updateUserProfile } = useAuth();
+    const { user, setUser, updateUserProfile } = useAuth();
     const navigate = useNavigate();
     const [userInfo] = useUserInfo();
-
+    console.log(userInfo._id)
 
     const upazilas = [
         'Ajmiriganj', 'Atpara', 'Austagram', 'Babuganj', 'Bagerhat Sadar', 'Bajitpur', 'Bakerganj', 'Banaripara', 'Keranigonj', ' Indurkani', 'Kolabagan', 'Shahabag', 'Banani',
@@ -109,7 +113,62 @@ const UpdateProfile = () => {
 
 
 
-    const handleUpdateProfile = event => {
+    const handleUpdateProfile = async (event) => {
+        event.preventDefault();
+        const name = event.target.name.value;
+        //const photo = event.target.photo.value;
+        const image = event.target.image.files[0]
+        const photoURL = await imageUpload(image);
+        const email = event.target.email.value;
+        const bloodGroup = event.target.blood_group.value;
+        const upazila = event.target.upazila.value;
+        const district = event.target.district.value;
+        console.log({ name, photoURL, email, bloodGroup, upazila, district });
+
+
+        updateUserProfile({
+            displayName: name,
+            photoURL: photoURL
+        })
+            .then(() => {
+                setUser({
+                    ...user, displayName: name,
+                    photoURL: photoURL
+                });
+                // navigate("/");
+                const userUpdateInfo = {
+                    name: name,
+                    photo: photoURL,
+                    bloodGroup: bloodGroup,
+                    upazila: upazila,
+                    district: district,
+                }
+
+                //axiosSecure.patch(`/users/${userInfo._id}`, userUpdateInfo)
+                //navigate("/dashboard/userProfile");
+
+                axiosSecure.put(`/users/${userInfo._id}`, userUpdateInfo)
+
+                    .then(res => {
+                        if (res.data.modifiedCount > 0) {
+                            console.log('User data added to Database');
+
+                            Swal.fire({
+                                title: 'Profile Updated',
+                                text: `${user?.displayName} Profile Updated Successfully`,
+                                icon: 'success',
+                                confirmButtonText: 'Thank You'
+                            });
+
+                            navigate("/dashboard/userProfile");
+                        }
+                    })
+
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
 
     }
 
