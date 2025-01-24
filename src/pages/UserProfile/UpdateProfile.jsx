@@ -173,9 +173,9 @@ const UpdateProfile = () => {
     }
 
     return (
-        <div className=' m-24 p-24 bg-red-200'>
+        <div className=' md:m-24 p-6 md:p-24 bg-red-200'>
 
-            <h2 className='text-red-600 font-bold text-4xl text-center pb-12'>  Update Profile Information</h2>
+            <h2 className='text-red-600 font-bold text-2xl md:text-4xl text-center pb-12'>  Update Profile Information</h2>
 
             <form onSubmit={handleUpdateProfile} className='space-y-4  '>
 

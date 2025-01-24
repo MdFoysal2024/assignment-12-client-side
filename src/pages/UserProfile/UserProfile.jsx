@@ -9,16 +9,10 @@ const UserProfile = () => {
 
     return (
         <div>
-            <div className=' py-12 '>
+            <div className=' md:py-12 '>
 
 
-
-
-
-
-
-
-                <div className='my-12 space-y-6 mx-24 bg-red-200 p-24'>
+                <div className='md:my-12 space-y-6 md:mx-24 bg-red-200 px-6 py-6 md:p-24'>
                     <div className='text-center pb-12'>
 
                         <img className="w-44 mx-auto rounded-full  mb-12 border-4 " src={userInfo?.photo} alt="" />
@@ -26,8 +20,7 @@ const UserProfile = () => {
                     </div>
 
 
-
-                    <div className=' flex justify-between'>
+                    <div className=' flex flex-col md:flex-row justify-between'>
 
                         <div className='flex flex-col  gap-6 justify-between '>
                             <div>
