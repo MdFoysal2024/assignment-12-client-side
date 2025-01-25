@@ -21,6 +21,9 @@ import DonationRequestDetails from "../pages/DonarPage/DonationRequestDetails";
 import AddBlog from "../pages/AdminPage/AddBlog";
 import UserProfile from "../pages/UserProfile/UserProfile";
 import UpdateProfile from "../pages/UserProfile/UpdateProfile";
+import AllBloodDonationRequest1 from "../pages/VolunteerPage/AllBloodDonationRequest1";
+ import ContentManagement1 from "../pages/VolunteerPage/ContentManagement1";
+import VolunteerHome from "../pages/VolunteerPage/VolunteerHome";
 
 
 export const router = createBrowserRouter([
@@ -49,7 +52,7 @@ export const router = createBrowserRouter([
             {
                 path: 'funding',
                 element: <PrivateRoute><FundingPage></FundingPage></PrivateRoute>
-               
+
             },
             {
                 path: 'blog',
@@ -98,13 +101,13 @@ export const router = createBrowserRouter([
                 element: <MyDonationRequests></MyDonationRequests>
             },
             {
-                
+
                 path: 'editDonationRequest/:id',
                 element: <EditDonationRequest></EditDonationRequest>,
                 loader: ({ params }) => fetch(`http://localhost:5000/donationRequest/${params.id}`)
             },
             {
-                
+
                 path: 'donationRequestDetails/:id',
                 element: <DonationRequestDetails></DonationRequestDetails>,
                 loader: ({ params }) => fetch(`http://localhost:5000/donationRequest/${params.id}`)
@@ -112,6 +115,18 @@ export const router = createBrowserRouter([
 
 
             //only Volunteer routes---->
+            {
+                path:'volunteerHome',
+                element: <VolunteerHome></VolunteerHome>
+            },
+            {
+                path: 'volunteer/all-blood-donation-request',
+                element: <AllBloodDonationRequest1></AllBloodDonationRequest1>
+            },
+            {
+                path: 'volunteer/content-management',
+                element: <ContentManagement1></ContentManagement1>
+            },
 
 
 

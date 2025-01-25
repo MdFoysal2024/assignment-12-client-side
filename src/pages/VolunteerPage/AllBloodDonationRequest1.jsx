@@ -7,9 +7,8 @@ import { BiEdit } from 'react-icons/bi';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { BsEye } from 'react-icons/bs';
 
-const AllBloodDonationRequest = () => {
-
-
+const AllBloodDonationRequest1 = () => {
+    
     //custom hooks-->
     const axiosSecure = useAxiosSecure();
     //  const { user } = useAuth();
@@ -24,12 +23,6 @@ const AllBloodDonationRequest = () => {
 
 
     })
-
-
-
-
-
-
 
 
     return (
@@ -165,6 +158,9 @@ const AllBloodDonationRequest = () => {
         </div >
         </div>
     );
+
+
+    
 };
 
-export default AllBloodDonationRequest;
+export default AllBloodDonationRequest1;

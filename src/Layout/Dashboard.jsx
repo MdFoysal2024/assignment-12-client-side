@@ -7,16 +7,21 @@ import { MdBookmarks } from "react-icons/md";
 import { PiGitPullRequestBold } from "react-icons/pi";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import useAdmin from "../hooks/useAdmin";
 
 
 const Dashboard = () => {
     const { user } = useAuth();
 
     //for test--->
-    const [isAdmin, setIsAdmin] = useState('null');
+    //const [isAdmin, setIsAdmin] = useState('null');
+     //const [isAdmin, setIsAdmin] = useState('null');
+     const [isVolunteer, setIsVolunteer] = useState(null);
     //const [isAdmin, setIsAdmin] = useState('Admin');
+    const [isAdmin] = useAdmin();
+    //const [isAdmin] = useAdmin();
 
-    const [admin, setAdmin] = useState('View Profile');
+
 
     return (
         <div className='flex container mx-auto'>
@@ -30,7 +35,7 @@ const Dashboard = () => {
                     <p className=''> {user?.email}</p>
 
                     <Link to='/dashboard/userProfile'>
-                        <p className='bg-red-100 w-36 mx-auto text-xl my-2 font-bold text-red-600 p-2 '> {admin}</p>
+                        <p className='bg-red-100 w-36 mx-auto text-xl my-2 font-bold text-red-600 p-2 '>View Profile</p>
                     </Link>
 
                 </div>
@@ -58,8 +63,24 @@ const Dashboard = () => {
 
                             </>
 
-                            :
+                            : isVolunteer? 
+                            <>
+                            
+                            <li>
+                                    <NavLink to="/dashboard/volunteerHome">   <FaHome className='text-2xl' /> Volunteer Home</NavLink>
+                                </li>
 
+                                <li>
+                                    <NavLink to="/dashboard/volunteer/all-blood-donation-request">   <FaList className='text-xl' />All Blood Donation Request</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/volunteer/content-management">   <MdBookmarks className='text-xl' />Content Management</NavLink>
+                                </li>
+
+                            
+                            
+                            </>
+:
                             <>
                                 <li>
                                     <NavLink to="/dashboard/donorHome">   <FaHome className='text-2xl' /> Donor Home</NavLink>
