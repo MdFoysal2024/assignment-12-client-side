@@ -1,7 +1,12 @@
 import React from 'react';
 import banner_img from '../../../assets/banner-img.png'
 import { Link } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 const Banner = () => {
+
+    const { user } = useAuth();
+
+
     return (
         <div className="bg-red-200 md:p-24">
 
@@ -13,9 +18,17 @@ const Banner = () => {
                         The Blood Donor App Put the power to save lives in the palm of your hand, consectetur adipisicing elit. Libero, rerum obcaecati. Alias recusandae  deleniti suscipit voluptate commodi praesentium Donor App Put the power to incidunt accusantium.
                     </p>
                     <div className="flex gap-6 mt-2">
-                        <Link to='/signUp'>
-                            <button className="btn border-none md:text-xl text-white  hover:bg-red-800 bg-red-600">Join as a donor</button>
-                        </Link>
+                        {user ?
+                            <Link to='/signUp'>
+                                <button disabled className="btn  border-none md:text-xl text-white  hover:bg-red-800 bg-red-600">Join as a donor</button>
+                            </Link>
+                            :
+                            <Link to='/signUp'>
+                                <button className="btn border-none md:text-xl text-white  hover:bg-red-800 bg-red-600">Join as a donor</button>
+                            </Link>
+
+                        }
+
                         <Link to='/search'>
                             <button className="btn border-none md:text-xl text-red-600  hover:text-white hover:bg-red-800 bg-white">Search Donors</button>
                         </Link>

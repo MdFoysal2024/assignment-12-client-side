@@ -8,6 +8,7 @@ import { PiGitPullRequestBold } from "react-icons/pi";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import useAdmin from "../hooks/useAdmin";
+import useVolunteer from "../hooks/useVolunteer";
 
 
 const Dashboard = () => {
@@ -16,7 +17,7 @@ const Dashboard = () => {
     //for test--->
     //const [isAdmin, setIsAdmin] = useState('null');
      //const [isAdmin, setIsAdmin] = useState('null');
-     const [isVolunteer, setIsVolunteer] = useState(null);
+     const [isVolunteer] = useVolunteer();
     //const [isAdmin, setIsAdmin] = useState('Admin');
     const [isAdmin] = useAdmin();
     //const [isAdmin] = useAdmin();

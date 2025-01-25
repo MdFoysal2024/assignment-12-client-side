@@ -8,6 +8,8 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import { CiLogout } from "react-icons/ci";
 import { MdDashboardCustomize, MdEmail } from "react-icons/md";
 import { AiFillCloseCircle } from "react-icons/ai";
+import useAdmin from "../../../hooks/useAdmin";
+import useVolunteer from "../../../hooks/useVolunteer";
 
 const Navbar = () => {
 
@@ -16,12 +18,11 @@ const Navbar = () => {
     // const [isAdmin] = useAdmin();
 
     //for test--->
-    const [isAdmin, setIsAdmin] = useState('null');
+    // const [isAdmin, setIsAdmin] = useState(null);
 
 
-
-
-
+    const [isAdmin] = useAdmin();
+    const [isVolunteer] = useVolunteer()
 
     const navOptions = <>
         <li><Link to='/' className='hover:underline text-lg font-semibold'>Home</Link></li>
@@ -150,13 +151,18 @@ const Navbar = () => {
                                                                 <p className="text-black flex gap-2 items-center"><MdDashboardCustomize />Dashboard</p>
                                                             </Link>
                                                         </>
-                                                            :
-                                                            <>
-                                                                <Link to="/dashboard/donorHome">
+                                                            : isVolunteer ? <>
+                                                                <Link to="/dashboard/volunteerHome">
                                                                     <p className="text-black flex gap-2 items-center"><MdDashboardCustomize />Dashboard</p>
                                                                 </Link>
                                                             </>
-                                                            
+                                                                :
+                                                                <>
+                                                                    <Link to="/dashboard/donorHome">
+                                                                        <p className="text-black flex gap-2 items-center"><MdDashboardCustomize />Dashboard</p>
+                                                                    </Link>
+                                                                </>
+
                                                     }
                                                 </div>
 
