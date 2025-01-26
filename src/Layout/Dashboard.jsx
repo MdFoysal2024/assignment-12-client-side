@@ -112,7 +112,7 @@ const Dashboard = () => {
                     </li>
 
                     <li>
-                        <NavLink to="/contact">   <IoIosContacts className='text-2xl' /> Contact Us</NavLink>
+                        <NavLink to="/">   <IoIosContacts className='text-2xl' /> Contact Us</NavLink>
                     </li>
 
                 </ul>
