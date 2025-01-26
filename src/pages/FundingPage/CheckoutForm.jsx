@@ -109,34 +109,36 @@ const CheckoutForm = ({ donorName, donationDate, donationAmount }) => {
             if (paymentIntent.status === 'succeeded') {
                 //inspect > console > paymentIntent > id and status : succeeded  -->
                 console.log('transaction id', paymentIntent.id);
-                setTransactionId(paymentIntent.id)
+                setTransactionId(paymentIntent.id);
+
+
+
+
             }
         }
 
-        // // save the payment info in to the database ---->
-        // const payment = {
-        //     email: user.email,
-        //     price: totalPrice,
-        //     transactionId: paymentIntent.id,
-        //     data: new Date(), // have to convert in utc time (use moment js)
-        //     cartIds: cart.map(item => item._id), // _id is present db id--> order লিষ্ট হতে my cart এ add করার id
-        //     menuItemIds: cart.map(item => item.menuId), // order লিষ্ট/ফুড লিস্টে নতুন item add করার সময় db তে যে _id তৈরী হয়েছিলো ঐ _id দিয়ে item কে যখন my cart এ add করা হয় তখন আগের _id কে menuId হিসাবে db তে post করা হয়, এবং নতুন করে অঅরো একটি _id তৈরী হয় ।
-        //     status: 'pending'
-        // }
+        // save the payment info in to the database ---->
+        const donationData = {
+            name: donorName,
+            amount: donationAmount,
+            date: donationDate, 
+            transactionId: paymentIntent.id,
+           
+        }
 
-        // const res = await axiosSecure.post('/payments', payment)
-        // console.log('Payment Saved', res.data);
+        const res = await axiosSecure.post('/donations', donationData)
+        console.log('Donation Saved', res.data);
         // refetch();
-        // if (res.data?.paymentResult?.insertedId) {
-        //     Swal.fire({
-        //         position: "center",
-        //         icon: "success",
-        //         title: "Thanks For Payment Successfully",
-        //         showConfirmButton: false,
-        //         timer: 1500
-        //     });
-        //     navigate('/dashboard/paymentHistory');
-        // }
+        if (res.data?.paymentResult?.insertedId) {
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Thanks For Donation Successfully",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            navigate('/funding');
+        }
     }
 
 

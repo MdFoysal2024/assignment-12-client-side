@@ -3,17 +3,17 @@ import { useLoaderData } from 'react-router-dom';
 
 const DonationRequestDetails = () => {
 
-    const editDonation = useLoaderData()
-    console.log({ editDonation })
+    const donationDetails = useLoaderData()
+    console.log({ donationDetails })
     // console.log( editDonation.blood_group)
-    const { name, email } = editDonation || {}
+    const { name, email } = donationDetails || {}
     console.log(name)
     return (
         <div>
             <div className='p-24'>
             <p className='text-5xl font-bold text-red-600'>{name}</p>
             <p className='text-2xl font-bold text-red-600'>{email}</p>
-            Edit and update DonationRequests 
+            Donation Requests Details
         </div>
         </div>
     );

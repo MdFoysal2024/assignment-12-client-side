@@ -5,6 +5,9 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import { format } from "date-fns";
 
 
 const FundingPage = () => {
@@ -12,7 +15,22 @@ const FundingPage = () => {
     const navigate = useNavigate();
     const [startDate, setStartDate] = useState(new Date());
 
+    //custom hooks-->
+    const axiosSecure = useAxiosSecure();
 
+
+    const { refetch, data: donationData = [] } = useQuery({
+
+        queryKey: ['donationData'],
+        queryFn: async () => {
+
+            const res = await axiosSecure.get('/donations');
+
+            return res.data;
+
+        }
+
+    })
 
 
 
@@ -43,7 +61,9 @@ const FundingPage = () => {
                 <link rel="canonical" href="http://mysite.com/example" />
             </Helmet>
             <div className="text-center w-full md:w-1/2 mx-auto py-12">
-
+                <div>
+                    {donationData.length}
+                </div>
                 <h2 className="text-5xl pb-6 font-bold text-red-600"> Fund For Organization</h2>
                 <p className="text-gray-500">You are funding lifesaving resources and interventions sit amet consectetur adipisicing elit. Tempore perferendis provident necessitatibus hic eligendi autem.</p>
             </div>
@@ -131,7 +151,70 @@ const FundingPage = () => {
 
 
 
+            <div>
+                {
+                    donationData.length ? <div className="overflow-x-auto my-8">
+                        <table className="table">
+                            {/* head */}
+                            <thead className="bg-red-600 text-lg text-white ">
+                                <tr className="">
+                                    <th className="pl-6">
+                                        #
+                                    </th>
+                                    <th> Name</th>
+                                    <th> Date</th>
+                                    <th> Transaction ID</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
+
+
+                                {
+                                    donationData.map((data, idx) => <tr key={data._id}>
+                                        <th>
+                                            {idx + 1}
+                                        </th>
+
+                                        <td className="text-lg font-bold">
+                                            {data.name}
+                                        </td>
+                                        <td>
+                                       
+                                            {format(new Date(data.date), 'P')}
+
+                                        </td>
+                                        <td>
+                                            {data.
+                                                transactionId}
+                                        </td>
+                                        <td className="text-lg font-bold">
+                                            ${data.
+                                                amount
+                                            }
+                                        </td>
+
+
+
+
+
+
+                                    </tr>)
+                                }
+
+
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                        :
+                        <div className="text-center text-2xl pt-12 font-bold">
+                            No data  Available Here...
+                        </div>
+                }
+            </div>
 
 
 
