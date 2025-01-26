@@ -18,7 +18,7 @@ const Main = () => {
 
             {/* Main Outlet Section */}
 
-            <div className='min-h-[calc(100vh-593px)] '>
+            <div className='min-h-[calc(100vh-500px)] '>
                 <Outlet></Outlet>
             </div>
 

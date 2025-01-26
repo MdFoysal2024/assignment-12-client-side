@@ -25,6 +25,8 @@ import AllBloodDonationRequest1 from "../pages/VolunteerPage/AllBloodDonationReq
  import ContentManagement1 from "../pages/VolunteerPage/ContentManagement1";
 import VolunteerHome from "../pages/VolunteerPage/VolunteerHome";
 
+import Donation from "../pages/FundingPage/Donation";
+
 
 export const router = createBrowserRouter([
     //Main routes section--------->
@@ -52,6 +54,11 @@ export const router = createBrowserRouter([
             {
                 path: 'funding',
                 element: <PrivateRoute><FundingPage></FundingPage></PrivateRoute>
+
+            },
+            {
+                path: 'donation',
+                element: <PrivateRoute><Donation></Donation></PrivateRoute>
 
             },
             {

@@ -10,7 +10,7 @@ const BlogCard = ({ blog }) => {
     // Remove all HTML tags using a regex
 
     const plainText = contentText.replace(/<\/?[^>]+(>|$)/g, "");
-    
+
     return (
         <div>
             <div className=" bg-gray-200 p-6 space-y-4 shadow-xl">
@@ -27,7 +27,7 @@ const BlogCard = ({ blog }) => {
                     </div>
 
                     <div>
-                        {plainText}
+                        {content}
 
                     </div>
 
