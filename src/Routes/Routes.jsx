@@ -27,6 +27,7 @@ import VolunteerHome from "../pages/VolunteerPage/VolunteerHome";
 
 import Donation from "../pages/FundingPage/Donation";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import BlogDetails from "../pages/AdminPage/BlogDetails";
 
 
 export const router = createBrowserRouter([
@@ -71,7 +72,8 @@ export const router = createBrowserRouter([
             {
                 path: 'donationRequests',
                 element: <DonationRequests></DonationRequests>
-            }
+            },
+            
         ]
     },
 
@@ -159,6 +161,12 @@ export const router = createBrowserRouter([
             {
                 path: 'addBlog',
                 element: <AddBlog></AddBlog>
+            },
+            {
+
+                path: 'blogDetails/:id',
+                element: <BlogDetails></BlogDetails>,
+                loader: ({ params }) => fetch(`http://localhost:5000/blogs/${params.id}`)
             },
         ]
     }

@@ -90,7 +90,7 @@ const AllBloodDonationRequest = () => {
 
                                             </td>
                                             <td className='text-gray-500'>
-                                                {request.upazila},{request.district}
+                                                {request.upazila}, {request.district}
 
                                             </td>
                                             <td>

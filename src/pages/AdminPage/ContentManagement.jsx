@@ -36,7 +36,7 @@ const ContentManagement = () => {
     return (
         <div className='p-24'>
             <h2 className='text-center font-bold pb-12 text-red-600 text-5xl'>Content Management</h2>
-            <div className='flex justify-between'>
+            <div className='flex justify-between p-4 items-center'>
 
                 <div>
                     <select defaultValue='default'
@@ -48,7 +48,7 @@ const ContentManagement = () => {
 
                 <div>
                     <Link to='/dashboard/addBlog'>
-                        <button className='btn mt-6 text-white text-lg px-8 bg-red-600 hover:bg-red-800 font-semibold'>Add Blog</button>
+                        <button className='btn  text-white text-lg px-8 bg-red-600 hover:bg-red-800 font-semibold'>Add Blog</button>
                     </Link>
                 </div>
 
