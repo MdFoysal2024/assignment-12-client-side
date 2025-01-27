@@ -22,7 +22,7 @@ import AddBlog from "../pages/AdminPage/AddBlog";
 import UserProfile from "../pages/UserProfile/UserProfile";
 import UpdateProfile from "../pages/UserProfile/UpdateProfile";
 import AllBloodDonationRequest1 from "../pages/VolunteerPage/AllBloodDonationRequest1";
- import ContentManagement1 from "../pages/VolunteerPage/ContentManagement1";
+import ContentManagement1 from "../pages/VolunteerPage/ContentManagement1";
 import VolunteerHome from "../pages/VolunteerPage/VolunteerHome";
 
 import Donation from "../pages/FundingPage/Donation";
@@ -73,7 +73,7 @@ export const router = createBrowserRouter([
                 path: 'donationRequests',
                 element: <DonationRequests></DonationRequests>
             },
-            
+
         ]
     },
 
@@ -120,14 +120,16 @@ export const router = createBrowserRouter([
             {
 
                 path: 'donationRequestDetails/:id',
-                element: <DonationRequestDetails></DonationRequestDetails>,
+                element: (<PrivateRoute>
+                    <DonationRequestDetails></DonationRequestDetails>
+                </PrivateRoute>),
                 loader: ({ params }) => fetch(`http://localhost:5000/donationRequest/${params.id}`)
             },
 
 
             //only Volunteer routes---->
             {
-                path:'volunteerHome',
+                path: 'volunteerHome',
                 element: <VolunteerHome></VolunteerHome>
             },
             {

@@ -42,7 +42,7 @@ const BlogCardPublic = ({blog}) => {
                    
                         <Link to={`/dashboard/blogDetails/${_id}`}>
 
-                        <button className=" text-red-600 font-semibold px-4  text-lg bg-red-300"> Details</button>
+                        <button className=" text-white font-semibold px-8 rounded-lg text-lg bg-red-600"> Details</button>
                         </Link>
           
                     </div>

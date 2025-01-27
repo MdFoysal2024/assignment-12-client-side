@@ -39,7 +39,7 @@ const DonationRequests = () => {
 
             <div>
                 {
-                   bloodRequestList.length ?
+                   donors.length ?
                         <> <div className="overflow-x-auto my-8">
                             <table className="table">
                                 {/* head */}

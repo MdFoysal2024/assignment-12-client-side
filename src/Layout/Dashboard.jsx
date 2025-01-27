@@ -92,9 +92,9 @@ const Dashboard = () => {
                                 <li>
                                     <NavLink to="/dashboard/myDonationRequest">   <BiSolidDonateBlood className='text-2xl' /> My Donation Request</NavLink>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <NavLink to="/dashboard/paymentHistory">   <FaCalendar className='text-xl' />Funding History</NavLink>
-                                </li>
+                                </li> */}
 
 
                             </>

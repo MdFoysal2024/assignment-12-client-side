@@ -6,6 +6,7 @@ import { BiEdit } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { BsEye } from "react-icons/bs";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const MyDonationRequests = () => {
 
@@ -13,9 +14,78 @@ const MyDonationRequests = () => {
     const [donationRequest, refetch] = useDonationRequest();
     const axiosSecure = useAxiosSecure()
 
-    //-------->'/createDonationRequest'
 
-    //({donationRequest.length})
+    const handleDeleteRequest = (request) => {
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axiosSecure.delete(`/createDonationRequest/${request._id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Donation Request has been deleted.",
+                                icon: "success"
+                            });
+                            refetch();
+
+
+                        }
+                    })
+
+
+            }
+        });
+
+    }
+
+    const handleRequestDone = request => {
+        //console.log(user);
+        //console.log('User Admin creation Functionality start', user._id)
+        axiosSecure.patch(`/donationRequest/done/${request._id}`)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.modifiedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: 'Blood Donation Done',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+    }
+    const handleRequestCancel = request => {
+        //console.log(user);
+        //console.log('User Admin creation Functionality start', user._id)
+        axiosSecure.patch(`/donationRequest/cancel/${request._id}`)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.modifiedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: 'Blood Donation Cancel',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+    }
+
+
     return (
         <div className='bg-red-100 h-full' >
 
@@ -29,15 +99,15 @@ const MyDonationRequests = () => {
                     </h2>
                 </div>
                 <div className='pt-12'>
-                <select defaultValue='default'
-                    className="select select-bordered w-full max-w-xs">
-                    <option disabled value='default'>Filter</option>
-                    <option>pending</option>
-                    <option>inprogress</option>
-                    <option>done</option>
-                    <option>canceled</option>
-                </select>
-            </div>
+                    <select defaultValue='default'
+                        className="select select-bordered w-full max-w-xs">
+                        <option disabled value='default'>Filter</option>
+                        <option>pending</option>
+                        <option>inprogress</option>
+                        <option>done</option>
+                        <option>canceled</option>
+                    </select>
+                </div>
 
                 <div>
                     {
@@ -50,8 +120,10 @@ const MyDonationRequests = () => {
                                             <th className="pl-6">
                                                 SN
                                             </th>
-                                            <th>Name</th>
+                                            <th>Recipient Name</th>
                                             <th>Location</th>
+                                            <th>Donor Info</th>
+
                                             <th>Donation Date</th>
                                             <th>Donation Time</th>
                                             <th>Blood Group</th>
@@ -81,6 +153,29 @@ const MyDonationRequests = () => {
 
                                                 </td>
                                                 <td>
+                                                    {
+                                                        request.status === 'inprogress' ?
+                                                            <>
+                                                                <div>
+                                                                    <p className='text-red-600 font-semibold bg-red-300 px-2 text-center '>{request.donorName}</p>
+                                                                    <p className='text-red-600 font-semibold bg-red-300 px-2 text-center '>{request.donorEmail}</p>
+                                                                </div>
+
+                                                            </>
+                                                            :
+                                                            request.status === 'Done' ?
+                                                                <>
+                                                                    <div>
+                                                                        <p className='text-red-600 font-semibold bg-red-300 px-2 text-center '>{request.donorName}</p>
+                                                                        <p className='text-red-600 font-semibold bg-red-300 px-2 text-center '>{request.donorEmail}</p>
+                                                                    </div>
+                                                                </>
+                                                                :
+                                                                <><p className='text-green-600 px-2  font-semibold bg-green-300  text-center '>No Donor Info</p></>
+                                                    }
+
+                                                </td>
+                                                <td>
                                                     {format(new Date(request.start_Date
                                                     ), 'P')}
 
@@ -102,28 +197,88 @@ const MyDonationRequests = () => {
                                                     {request.blood_group}
 
                                                 </td>
-                                                <td className="text-red-600 font-bold   text-center">
-                                                    <p className="bg-red-100 py-1 px-4 rounded-lg">{request.status}</p>
-
-
+                                                <td >
+                                                    {
+                                                        request.status === 'pending' ?
+                                                            <> <p className='text-red-600 font-semibold bg-red-300 px-2 text-center '>{request.status}</p></>
+                                                            : request.status === 'Cancel' ?
+                                                                <>
+                                                                    <p className='text-red-600 font-semibold bg-red-300 px-2 text-center '>{request.status}</p>
+                                                                </> :
+                                                                <><p className='text-green-600 px-2  font-semibold bg-green-300  text-center '>{request.status}</p></>
+                                                    }
                                                 </td>
 
                                                 <th>
-                                                    <Link to={`/dashboard/editDonationRequest/${request._id}`}>
-                                                        <button
-
-                                                            className=" p-3 text-xl text-red-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><BiEdit /></button>
-                                                    </Link>
-                                                    <button
-                                                        onClick={() => handleDelete(request._id)}
-                                                        className=" ml-2 p-3 text-xl text-red-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><RiDeleteBin2Fill /></button>
 
 
-                                                    <Link to={`/dashboard/donationRequestDetails/${request._id}`}>
-                                                        <button
+                                                    <div className="dropdown dropdown-end">
+                                                        <div tabIndex={0} role="button" className="btn m-1">Click Me</div>
+                                                        <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                                                            <li>
+                                                                <Link to={`/dashboard/editDonationRequest/${request._id}`}>
+                                                                    <button
 
-                                                            className=" p-3 text-xl text-red-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><BsEye /></button>
-                                                    </Link>
+                                                                        className=" p-3 text-xl text-green-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><BiEdit /></button>
+                                                                </Link>
+                                                            </li>
+                                                            <li>
+                                                                <button
+                                                                    onClick={() => handleDeleteRequest(request)}
+                                                                    className=" ml-2 p-3 text-xl text-red-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><RiDeleteBin2Fill />
+                                                                </button>
+
+                                                            </li>
+                                                            <li>
+                                                                <Link to={`/dashboard/donationRequestDetails/${request._id}`}>
+                                                                    <button
+
+                                                                        className=" p-3 text-xl text-purple-500-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><BsEye /></button>
+                                                                </Link>
+                                                            </li>
+
+
+
+                                                            {
+                                                                request.status === 'inprogress' ?
+                                                                    <>
+                                                                        <li><button
+                                                                            onClick={() => handleRequestDone(request)}
+                                                                            className=" ml-2 p-3 text-xl text-green-600 border-2 mb-2 border-gray-300 rounded-full hover:bg-slate-300"> Done
+                                                                        </button></li>
+                                                                    </>
+                                                                    :
+                                                                    <>
+                                                                    </>
+                                                            }
+                                                            {
+                                                                request.status === 'inprogress' ?
+                                                                    <>
+                                                                        <li><button
+                                                                            onClick={() => handleRequestCancel(request)}
+                                                                            className=" ml-2 p-3 text-xl text-red-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"> Cancel
+                                                                        </button></li>
+                                                                    </>
+                                                                    :
+                                                                    <>
+                                                                    </>
+                                                            }
+
+
+
+
+
+                                                        </ul>
+                                                    </div>
+
+
+
+
+
+
+
+
+
 
 
                                                 </th>

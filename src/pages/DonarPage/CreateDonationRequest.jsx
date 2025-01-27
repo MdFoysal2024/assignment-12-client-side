@@ -5,11 +5,14 @@ import 'react-datepicker/dist/react-datepicker.css'
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useUserInfo from "../../hooks/useUserInfo";
 
 
 const CreateDonationRequest = () => {
 
     const { user } = useAuth();
+    const [userInfo, refetch] = useUserInfo();
+    console.log(userInfo.status)
     const [startDate, setStartDate] = useState(new Date());
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
@@ -17,7 +20,7 @@ const CreateDonationRequest = () => {
     const upazilas = [
         'Ajmiriganj', 'Atpara', 'Austagram', 'Babuganj', 'Bagerhat Sadar', 'Bajitpur', 'Bakerganj', 'Banaripara', 'Keranigonj', ' Indurkani', 'Kolabagan', 'Shahabag', 'Banani',
         'Bandarban Sadar', 'Banglabandha', 'Barguna Sadar', 'Barhatta', 'Barisal Sadar', 'Basail', 'Belabo', 'Belkuchi',
-        'Benapole', 'Bhandaria', 'Badda' ,'Bheramara', 'Bhola Sadar', 'Bhuapur', 'Bijoynagar', 'Birampur', 'Birganj',
+        'Benapole', 'Bhandaria', 'Badda', 'Bheramara', 'Bhola Sadar', 'Bhuapur', 'Bijoynagar', 'Birampur', 'Birganj',
         'Bishwanath', 'Boalkhali', 'Bogra Sadar', 'Chakaria', 'Chandanaish', 'Chandpur Sadar', 'Chapai Nawabganj Sadar',
         'Chhatak', 'Chuadanga Sadar', 'Comilla Sadar', 'Cox’s Bazar Sadar', 'Daulatpur', 'Debhata', 'Debidwar',
         'Dinajpur Sadar', 'Dohar', 'Dumki', 'Dumuria', 'Faridganj', 'Faridpur Sadar', 'Fatikchhari', 'Feni Sadar',
@@ -176,234 +179,222 @@ const CreateDonationRequest = () => {
     return (
         <div className=' bg-red-100 w-full h-full'>
             <div className=" p-24">
-                <h2 className=" text-center pb-12 text-red-600 font-bold text-3xl md:text-5xl"> Blood Donation Request </h2>
-                <div className="card bg-base-100 w-full rounded-none  shrink-0 shadow-2xl">
-                    <form
-                        onSubmit={handleCreateDonationRequest}
-                        className="card-body p-24">
 
 
-                        <div className="flex flex-col md:flex-row justify-between gap-6">
 
-                            <div className="form-control w-full">
-                                <label className="label">
-                                    <span className="label-text">User Name</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    placeholder="User Name"
-                                    name="name"
-                                    disabled={true} defaultValue={user?.displayName}
-                                    className="input input-bordered" required />
+
+                <h2 className=" text-center pb-12 text-red-600 font-bold text-3xl md:text-5xl">Create Blood Donation Request </h2>
+
+                {
+                    userInfo.status === 'Active' ?
+                        <>
+                            <div className="card bg-base-100 w-full rounded-none  shrink-0 shadow-2xl">
+                                <form
+                                    onSubmit={handleCreateDonationRequest}
+                                    className="card-body p-24">
+
+
+                                    <div className="flex flex-col md:flex-row justify-between gap-6">
+
+                                        <div className="form-control w-full">
+                                            <label className="label">
+                                                <span className="label-text">User Name</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                placeholder="User Name"
+                                                name="name"
+                                                disabled={true} defaultValue={user?.displayName}
+                                                className="input input-bordered" required />
+                                        </div>
+                                        <div className="form-control w-full">
+                                            <label className="label">
+                                                <span className="label-text">User Email</span>
+                                            </label>
+                                            <input
+                                                type="email"
+                                                placeholder="email"
+                                                name="email"
+                                                disabled={true} defaultValue={user?.email}
+                                                className="input input-bordered" required />
+                                        </div>
+                                    </div>
+
+
+
+                                    <div className="flex flex-col md:flex-row justify-between gap-6">
+
+                                        <div className="form-control w-full">
+                                            <label className="label">
+                                                <span className="label-text">Recipient Name</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                placeholder="Recipient Name"
+                                                name="recipient_name"
+                                                className="input input-bordered" required />
+                                        </div>
+                                        <div className="form-control w-full">
+                                            <label className="label">
+                                                <span className="label-text">Full Address:</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="address"
+                                                placeholder="Full Address Here"
+                                                className="input input-bordered" required />
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div className="flex flex-col md:flex-row justify-between gap-6">
+
+                                        <div className="form-control w-full">
+                                            <label className="label">
+                                                <span className="label-text">Donation Date:</span>
+                                            </label>
+                                            <DatePicker
+                                                className='border p-3 w-full rounded-md'
+                                                selected={startDate} //--->name = {startDate} is dynamic value
+                                                onChange={date => setStartDate(date)}
+
+                                            />
+
+
+
+                                        </div>
+                                        <div className="form-control w-full">
+                                            <label className="label">
+                                                <span className="label-text">Donation Time</span>
+                                            </label>
+                                            <input
+                                                type="time"
+                                                placeholder="Donation Here"
+                                                name="time"
+                                                className="input input-bordered" required />
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                    <div className="flex flex-col md:flex-row justify-between gap-6">
+
+                                        <label className="form-control w-full mb-6">
+                                            <div className="label">
+                                                <span className="label-text">Blood Group*</span>
+                                            </div>
+                                            <select defaultValue={'BloodGroup'} name="blood_group"
+                                                className="select select-bordered w-full ">
+                                                <option value="A+">A+</option>
+                                                <option value="A-">A-</option>
+                                                <option value="B+">B+</option>
+                                                <option value="B-">B-</option>
+                                                <option value="AB+">AB+</option>
+                                                <option value="AB-">AB-</option>
+                                                <option value="O+">O+</option>
+                                                <option value="O-">O-</option>
+
+
+                                            </select>
+                                        </label>
+                                        <div className="form-control w-full">
+                                            <label className="label">
+                                                <span className="label-text"> Hospital Name:</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="hospital_name"
+                                                placeholder="Hospital Name Here"
+                                                className="input input-bordered" required />
+                                        </div>
+                                    </div>
+
+
+
+                                    <div className="flex flex-col md:flex-row justify-between gap-6 ">
+
+                                        <label >
+                                            <div className="label">
+                                                <span className="label-text"> Upazila:*</span>
+                                            </div>
+
+                                            <select
+                                                name="upazila"
+                                                className="select w-[435px] select-bordered  "
+                                            // value={formData.upazila}
+                                            // onChange={handleChange}
+                                            // required
+                                            >
+                                                <option value="" >Your Upazila</option>
+                                                {upazilas.map((upazila, idx) => (
+                                                    <option key={idx} value={upazila}>
+                                                        {upazila}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </label>
+                                        {/* -----District---- */}
+                                        <label>
+                                            <div className="label">
+                                                <span className="label-text"> Distric:*</span>
+                                            </div>
+
+                                            <select
+                                                name="district"
+                                                className="select select-bordered w-[435px] "
+                                            // value={formData.upazila}
+                                            // onChange={handleChange}
+                                            // required
+                                            >
+                                                <option value="" className=''>Your District</option>
+                                                {districts.map((district, idx) => (
+                                                    <option key={idx} value={district}>
+                                                        {district}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </label>
+                                    </div>
+
+
+
+
+                                    <div className="form-control w-full">
+                                        <label className="label">
+                                            <span className="label-text">Request Message</span>
+                                        </label>
+
+                                        <textarea name="request_message" id="" className="input input-bordered" required ></textarea>
+                                    </div>
+
+
+                                    <div className="form-control mt-6">
+                                        <button className="btn bg-red-600 text-white text-lg hover:bg-red-800 w-64 mx-auto">Create Request</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div className="form-control w-full">
-                                <label className="label">
-                                    <span className="label-text">User Email</span>
-                                </label>
-                                <input
-                                    type="email"
-                                    placeholder="email"
-                                    name="email"
-                                    disabled={true} defaultValue={user?.email}
-                                    className="input input-bordered" required />
-                            </div>
-                        </div>
+                        </>
+                        :
+                        <>
+                            <p className="text-center text-2xl font-bold text-red-600">
+                                Opps Sorry You are a Blocked User...
+                            </p></>
+                }
 
 
 
-                        <div className="flex flex-col md:flex-row justify-between gap-6">
 
-                            <div className="form-control w-full">
-                                <label className="label">
-                                    <span className="label-text">Recipient Name</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    placeholder="Recipient Name"
-                                    name="recipient_name"
-                                    className="input input-bordered" required />
-                            </div>
-                            <div className="form-control w-full">
-                                <label className="label">
-                                    <span className="label-text">Full Address:</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="address"
-                                    placeholder="Full Address Here"
-                                    className="input input-bordered" required />
-                            </div>
-                        </div>
 
-
-
-
-                        <div className="flex flex-col md:flex-row justify-between gap-6">
-
-                            <div className="form-control w-full">
-                                <label className="label">
-                                    <span className="label-text">Donation Date:</span>
-                                </label>
-                                <DatePicker
-                                    className='border p-3 w-full rounded-md'
-                                    selected={startDate} //--->name = {startDate} is dynamic value
-                                    onChange={date => setStartDate(date)}
-
-                                />
-
-
-
-                            </div>
-                            <div className="form-control w-full">
-                                <label className="label">
-                                    <span className="label-text">Donation Time</span>
-                                </label>
-                                <input
-                                    type="time"
-                                    placeholder="Donation Here"
-                                    name="time"
-                                    className="input input-bordered" required />
-                            </div>
-                        </div>
-
-
-
-
-
-                        <div className="flex flex-col md:flex-row justify-between gap-6">
-
-                            <label className="form-control w-full mb-6">
-                                <div className="label">
-                                    <span className="label-text">Blood Group*</span>
-                                </div>
-                                <select defaultValue={'BloodGroup'} name="blood_group"
-                                    className="select select-bordered w-full ">
-                                    <option value="A+">A+</option>
-                                    <option value="A-">A-</option>
-                                    <option value="B+">B+</option>
-                                    <option value="B-">B-</option>
-                                    <option value="AB+">AB+</option>
-                                    <option value="AB-">AB-</option>
-                                    <option value="O+">O+</option>
-                                    <option value="O-">O-</option>
-
-
-                                </select>
-                            </label>
-                            <div className="form-control w-full">
-                                <label className="label">
-                                    <span className="label-text"> Hospital Name:</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="hospital_name"
-                                    placeholder="Hospital Name Here"
-                                    className="input input-bordered" required />
-                            </div>
-                        </div>
-
-
-
-                        <div className="flex flex-col md:flex-row justify-between gap-6 ">
-
-                            <label >
-                                <div className="label">
-                                    <span className="label-text"> Upazila:*</span>
-                                </div>
-
-                                <select
-                                    name="upazila"
-                                    className="select w-[435px] select-bordered  "
-                                // value={formData.upazila}
-                                // onChange={handleChange}
-                                // required
-                                >
-                                    <option value="" >Your Upazila</option>
-                                    {upazilas.map((upazila, idx) => (
-                                        <option key={idx} value={upazila}>
-                                            {upazila}
-                                        </option>
-                                    ))}
-                                </select>
-                            </label>
-                            {/* -----District---- */}
-                            <label>
-                                <div className="label">
-                                    <span className="label-text"> Distric:*</span>
-                                </div>
-
-                                <select
-                                    name="district"
-                                    className="select select-bordered w-[435px] "
-                                // value={formData.upazila}
-                                // onChange={handleChange}
-                                // required
-                                >
-                                    <option value="" className=''>Your District</option>
-                                    {districts.map((district, idx) => (
-                                        <option key={idx} value={district}>
-                                            {district}
-                                        </option>
-                                    ))}
-                                </select>
-                            </label>
-                        </div>
-
-
-
-
-                        <div className="form-control w-full">
-                            <label className="label">
-                                <span className="label-text">Request Message</span>
-                            </label>
-
-                            <textarea name="request_message" id="" className="input input-bordered" required ></textarea>
-                        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <div className="form-control mt-6">
-                            <button className="btn bg-red-600 text-white text-lg hover:bg-red-800 w-64 mx-auto">Donation Request</button>
-                        </div>
-                    </form>
-                </div>
             </div>
         </div>
     );
+
+
+
 };
 
 export default CreateDonationRequest;

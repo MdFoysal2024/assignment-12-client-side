@@ -53,7 +53,12 @@ const SearchPage = () => {
 
     return (
         <div className='container mx-auto py-24 px-12'>
-            Search Donor
+           
+
+
+            <div className='text-center text-3xl py-4 md:text-5xl font-bold text-red-600'>
+                <p> Search Your Donor </p>
+            </div>
 
             <div className='flex justify-center my-8'>
                 <div className='flex p-1 overflow-hidden border rounded-lg    focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300'>
