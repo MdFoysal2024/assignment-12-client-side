@@ -2,8 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import useUserInfo from '../../hooks/useUserInfo';
 
 const BlogCard = ({ blog, refetch }) => {
+
+
+    const [userInfo] = useUserInfo();
+
+
+    console.log(userInfo.role)
     const { _id, title, photo, status, content } = blog || {};
 
     const axiosSecure = useAxiosSecure();
@@ -59,7 +66,7 @@ const BlogCard = ({ blog, refetch }) => {
     }
 
     const handleDeleteBlog = blog => {
-        
+
 
         Swal.fire({
             title: "Are you sure?",
@@ -82,7 +89,7 @@ const BlogCard = ({ blog, refetch }) => {
                             });
                             refetch();
 
-                            
+
                         }
                     })
 
@@ -172,25 +179,51 @@ const BlogCard = ({ blog, refetch }) => {
 
 
                     <div className=" flex flex-col gap-4 items-center lg:flex-row   mt-6 justify-between ">
-                        {
+
+
+                    {
+                            userInfo.role === 'Active' ?
+                                <>
+                                 {
                             status === 'Published' ?
-                                <><button 
-                                onClick={() => handleBlogUnpublished(blog)}
-                                className=" text-green-700 font-semibold px-6 text-lg bg-green-300">Unpublished</button></>
+                                <><button
+                                    onClick={() => handleBlogUnpublished(blog)}
+                                    className=" text-green-700 font-semibold px-6 text-lg bg-green-300">Unpublished</button></>
                                 :
                                 <>
                                     <button
                                         onClick={() => handleBlogPublished(blog)}
                                         className=" text-green-700 font-semibold px-2 text-lg bg-green-300">Published</button></>
+                        }   
+                                </>
+                                :
+                                <></>
                         }
+
+
+
+
+
+                        
 
                         <Link to={`/dashboard/blogDetails/${_id}`}>
 
                             <button className=" text-red-600 font-semibold px-2  text-lg bg-red-300"> Details</button>
                         </Link>
-                        <button 
-                         onClick={() => handleDeleteBlog(blog)}
-                        className=" text-red-600 font-semibold px-2  text-lg bg-red-300">Delete</button>
+
+
+                        {
+                            userInfo.role === 'Active' ?
+                                <>
+                                    <button
+                                        onClick={() => handleDeleteBlog(blog)}
+                                        className=" text-red-600 font-semibold px-2  text-lg bg-red-300">Delete</button>
+                                </>
+                                :
+                                <></>
+                        }
+
+
                     </div>
                 </div>
             </div>

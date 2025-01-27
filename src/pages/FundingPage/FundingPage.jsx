@@ -33,6 +33,16 @@ const FundingPage = () => {
     })
 
 
+    // const axiosSecure = useAxiosSecure();
+    const { data: stats } = useQuery({
+        queryKey: ['admin-stats'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/admin-stats');
+            return res.data
+        }
+
+    })
+
 
 
 
@@ -61,7 +71,7 @@ const FundingPage = () => {
                 <link rel="canonical" href="http://mysite.com/example" />
             </Helmet>
             <div className="text-center w-full md:w-1/2 mx-auto py-12">
-                
+
                 <h2 className="text-5xl pb-6 font-bold text-red-600"> Fund For Organization</h2>
                 <p className="text-gray-500">You are funding lifesaving resources and interventions sit amet consectetur adipisicing elit. Tempore perferendis provident necessitatibus hic eligendi autem.</p>
             </div>
@@ -179,7 +189,7 @@ const FundingPage = () => {
                                             {data.name}
                                         </td>
                                         <td>
-                                       
+
                                             {format(new Date(data.date), 'P')}
 
                                         </td>
@@ -205,6 +215,14 @@ const FundingPage = () => {
                             </tbody>
 
                         </table>
+
+
+                        {/* <div className=" flex justify-between mt-6 mr-12">
+                            <div></div>
+                            <div className=" border-t-2 border-red-600 md:mr-24 ">
+                                <h3 className="text-2xl font-bold text-red-600 "> <span>Total Amount: </span> ${stats.revenue}</h3>
+                            </div>
+                        </div> */}
                     </div>
 
                         :

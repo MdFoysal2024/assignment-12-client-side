@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
@@ -33,8 +33,8 @@ const CheckoutForm = ({ donorName, donationDate, donationAmount }) => {
 
     useEffect(() => {
         if (donationAmount > 0) {
-            axiosSecure.post('/create-payment-intent', { price: donationAmount }) 
-            //price কে  সার্ভার এর app.post('/create-payment-intent' থেকে আনা হলো ,
+            axiosSecure.post('/create-payment-intent', { price: donationAmount })
+                //price কে  সার্ভার এর app.post('/create-payment-intent' থেকে আনা হলো ,
                 .then(res => {
                     console.log(res.data.clientSecret);
 
@@ -56,7 +56,7 @@ const CheckoutForm = ({ donorName, donationDate, donationAmount }) => {
         event.preventDefault();
 
         if (!stripe || !elements) {
-            return ;
+            return;
             // যদি stripe/elements না পায় তাহলে return  করে দিবে।
             // Stripe.js has not loaded yet. Make sure to disable
             // form submission until Stripe.js has loaded.
@@ -69,7 +69,7 @@ const CheckoutForm = ({ donorName, donationDate, donationAmount }) => {
             // if (!card) or if (card === null)-->যদি card না পায় তাহলেও return  করে দিবে।
         }
 
-        
+
         // const donorInfo = {
         //     donorName,
         //     donationDate,
@@ -120,10 +120,10 @@ const CheckoutForm = ({ donorName, donationDate, donationAmount }) => {
         // save the payment info in to the database ---->
         const donationData = {
             name: donorName,
-            amount: donationAmount,
-            date: donationDate, 
+            amount: parseFloat(donationAmount),
+            date: donationDate,
             transactionId: paymentIntent.id,
-           
+
         }
 
         const res = await axiosSecure.post('/donations', donationData)
@@ -165,7 +165,7 @@ const CheckoutForm = ({ donorName, donationDate, donationAmount }) => {
                 Donate
             </button>
 
-            
+
             <p className="text-red-500 font-bold">{error}</p>
             {
                 transactionId && <p>Your Transaction ID: {transactionId}  </p>
