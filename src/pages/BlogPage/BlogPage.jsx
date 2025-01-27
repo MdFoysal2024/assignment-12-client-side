@@ -22,7 +22,7 @@ const BlogPage = () => {
 
 
 
-    const blogs = blogsList.filter(blog => blog.status === 'Draft');
+    const blogs = blogsList.filter(blog => blog.status === 'Published');
 
     console.log(blogs);
 
@@ -32,14 +32,32 @@ const BlogPage = () => {
     return (
 
         <div className='container mx-auto py-24'>blog page
-        
-        
-        <div className='grid gap-6 grid-cols-1 mt-12  md:grid-cols-2 lg:grid-cols-4'>
-                {
-                    blogs.map(blog => <BlogCardPublic key={blog._id} blog={blog} ></BlogCardPublic>)
+
+
+            <div>
+
+                {blogs.length ?
+                    <>
+                        <div className='grid gap-6 grid-cols-1 mt-12  md:grid-cols-2 lg:grid-cols-4'>
+                            {
+                                blogs.map(blog => <BlogCardPublic key={blog._id} blog={blog} ></BlogCardPublic>)
+                            }
+                        </div>
+
+                    </>
+                    :
+                    <>
+                        <p className='text-center pt-12 font-semibold text-2xl text-red-500'>No Data Available Here...
+                        </p></>
+
                 }
             </div>
-        
+
+
+
+
+
+
         </div>
 
 

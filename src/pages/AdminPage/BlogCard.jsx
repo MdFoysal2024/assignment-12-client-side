@@ -1,15 +1,141 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
-const BlogCard = ({ blog }) => {
+const BlogCard = ({ blog, refetch }) => {
     const { _id, title, photo, status, content } = blog || {};
 
+    const axiosSecure = useAxiosSecure();
 
     const stripHtmlTags = (html) => {
         return html?.replace(/<\/?[^>]+(>|$)/g, "") || "";
     };
 
-   
+
+
+
+
+    const handleBlogPublished = blog => {
+        //console.log(user);
+        //console.log('User Admin creation Functionality start', user._id)
+        axiosSecure.patch(`/blogs/published/${blog._id}`)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.modifiedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${title} is Published Now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+
+
+    }
+
+    const handleBlogUnpublished = blog => {
+        //console.log(user);
+        //console.log('User Admin creation Functionality start', user._id)
+        axiosSecure.patch(`/blogs/unpublished/${blog._id}`)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.modifiedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${title} is UnPublished Now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+
+
+    }
+
+    const handleDeleteBlog = blog => {
+        
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axiosSecure.delete(`/blogs/${blog._id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your Blog has been deleted.",
+                                icon: "success"
+                            });
+                            refetch();
+
+                            
+                        }
+                    })
+
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // axiosSecure.patch(`/blogs/unpublished/${blog._id}`)
+        //     .then(res => {
+        //         console.log(res.data);
+        //         if (res.data.modifiedCount > 0) {
+        //             refetch();
+        //             Swal.fire({
+        //                 position: "top-end",
+        //                 icon: "success",
+        //                 title: `${title} is UnPublished Now!`,
+        //                 showConfirmButton: false,
+        //                 timer: 1500
+        //             });
+        //         }
+        //     })
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     return (
         <div>
@@ -17,7 +143,7 @@ const BlogCard = ({ blog }) => {
                 <figure>
                     <img
                         src={photo}
-                        className='w-full h-[180px]'
+                        className='w-full '
                         alt="Image Loading..." />
                 </figure>
                 <div className="">
@@ -45,20 +171,26 @@ const BlogCard = ({ blog }) => {
 
 
 
-                    <div className=" flex mt-6 justify-between ">
+                    <div className=" flex flex-col gap-4 items-center lg:flex-row   mt-6 justify-between ">
                         {
                             status === 'Published' ?
-                                <><button className=" text-green-700 font-semibold px-6 text-lg bg-green-300">Unpublished</button></>
+                                <><button 
+                                onClick={() => handleBlogUnpublished(blog)}
+                                className=" text-green-700 font-semibold px-6 text-lg bg-green-300">Unpublished</button></>
                                 :
                                 <>
-                                    <button className=" text-green-700 font-semibold px-2 text-lg bg-green-300">Published</button></>
+                                    <button
+                                        onClick={() => handleBlogPublished(blog)}
+                                        className=" text-green-700 font-semibold px-2 text-lg bg-green-300">Published</button></>
                         }
 
                         <Link to={`/dashboard/blogDetails/${_id}`}>
 
                             <button className=" text-red-600 font-semibold px-2  text-lg bg-red-300"> Details</button>
                         </Link>
-                        <button className=" text-red-600 font-semibold px-2  text-lg bg-red-300">Delete</button>
+                        <button 
+                         onClick={() => handleDeleteBlog(blog)}
+                        className=" text-red-600 font-semibold px-2  text-lg bg-red-300">Delete</button>
                     </div>
                 </div>
             </div>
