@@ -77,7 +77,7 @@ const MyDonationRequests = () => {
 
                                                 </td>
                                                 <td>
-                                                    {request.upazila},{request.district}
+                                                    {request.upazila}, {request.district}
 
                                                 </td>
                                                 <td>

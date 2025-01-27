@@ -61,9 +61,7 @@ const FundingPage = () => {
                 <link rel="canonical" href="http://mysite.com/example" />
             </Helmet>
             <div className="text-center w-full md:w-1/2 mx-auto py-12">
-                <div>
-                    {donationData.length}
-                </div>
+                
                 <h2 className="text-5xl pb-6 font-bold text-red-600"> Fund For Organization</h2>
                 <p className="text-gray-500">You are funding lifesaving resources and interventions sit amet consectetur adipisicing elit. Tempore perferendis provident necessitatibus hic eligendi autem.</p>
             </div>

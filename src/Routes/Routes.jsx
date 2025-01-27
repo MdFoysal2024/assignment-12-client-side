@@ -26,6 +26,7 @@ import AllBloodDonationRequest1 from "../pages/VolunteerPage/AllBloodDonationReq
 import VolunteerHome from "../pages/VolunteerPage/VolunteerHome";
 
 import Donation from "../pages/FundingPage/Donation";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 
 export const router = createBrowserRouter([
@@ -33,6 +34,7 @@ export const router = createBrowserRouter([
     {
         path: "/",
         element: <Main></Main>,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: '/',
