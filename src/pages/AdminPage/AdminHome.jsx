@@ -97,8 +97,8 @@ const AdminHome = () => {
                     </div>
 
                     <div>
-                        <p className='text-gray-600 font-bold'>Total Donation Amount</p>
-                        <h2 className='font-extrabold text-4xl md:text-6xl text-purple-600 '>${stats?.users}</h2>
+                        <p className='text-gray-600 font-bold'>Total Users</p>
+                        <h2 className='font-extrabold text-4xl md:text-6xl text-purple-600 '>{stats?.users}</h2>
 
                     </div>
                 </div>
