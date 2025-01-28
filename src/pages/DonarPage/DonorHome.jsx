@@ -99,6 +99,24 @@ const DonorHome = () => {
                 <h2 className=' text-2xl md:text-4xl font-bold'>Hi Welcome,  <span className='text-red-600'>{user?.displayName}</span></h2>
 
             </div>
+            <div className='w-3/4'>
+                <p className='font-semibold py-6 text-xl '> Thank you for being the heart of this noble cause. Your leadership and dedication empower us to save lives and bring hope to those in need.</p>
+                <p> This platform is designed to make managing donations effortless and impactful. Here, you can:</p>
+                <ul className='pl-4 text-gray-500 py-4'>
+                    <li>
+                        * Track donations and campaigns in real time.
+                    </li>
+                    <li>
+                        * Engage with donors and volunteers.
+                    </li>
+                    <li>
+                        * Share stories of hope and transformation.
+                    </li>
+                </ul>
+
+
+                <p>Together, lets make a difference and build a community of kindness. If you need assistance or have suggestions, we are here to support you every step of the way.</p>
+            </div>
 
                 <div className='my-12'>
                     <h2 className="text-center text-red-600 font-bold text-3xl">
@@ -200,7 +218,7 @@ const DonorHome = () => {
                                                     {
                                                         request.status === 'pending' ?
                                                             <> <p className='text-red-600 font-semibold bg-red-300 px-2 text-center '>{request.status}</p></>
-                                                            : request.status === 'Cancel' ?
+                                                            : request.status === 'Canceled' ?
                                                                 <>
                                                                     <p className='text-red-600 font-semibold bg-red-300 px-2 text-center '>{request.status}</p>
                                                                 </> :

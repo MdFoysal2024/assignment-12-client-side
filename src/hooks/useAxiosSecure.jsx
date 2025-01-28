@@ -28,22 +28,22 @@ const useAxiosSecure = () => {
 
     // interceptors response document and 401, 403 error status then logout --->
 
-    axiosSecure.interceptors.response.use(function (response) {
-        return response;
-    }, async (error) => {
-        const status = error.response.status;
-        console.log(' Error Status of Interceptors ', status);
+    // axiosSecure.interceptors.response.use(function (response) {
+    //     return response;
+    // }, async (error) => {
+    //     const status = error.response.status;
+    //     console.log(' Error Status of Interceptors ', status);
 
-        if (status === 401 || status === 403) {
+    //     if (status === 401 || status === 403) {
 
-            await logOut();
+    //         await logOut();
 
-            navigate('/login')
-        }
+    //         navigate('/login')
+    //     }
 
 
-        return Promise.reject(error);
-    })
+    //     return Promise.reject(error);
+    // })
 
 
     return axiosSecure;

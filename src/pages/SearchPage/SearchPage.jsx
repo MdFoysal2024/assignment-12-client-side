@@ -65,10 +65,11 @@ const SearchPage = () => {
     //custom hooks-->
     const axiosSecure = useAxiosSecure();
     const [search, setSearch] = useState('');
-
+    console.log(search)
+    
     const { refetch, data: users = [] } = useQuery({
 
-        queryKey: [currentPage, itemsPerPage, 'users'],
+        queryKey: [search, currentPage, itemsPerPage, 'users'],
         queryFn: async () => {
 
             //const res = await axiosSecure.get('/users')
@@ -84,7 +85,7 @@ const SearchPage = () => {
             // });
 
 
-            const res = await axiosSecure.get(`/usersDonor?page=${currentPage}&size=${itemsPerPage}`);
+            const res = await axiosSecure.get(`/usersDonor?page=${currentPage}&size=${itemsPerPage}&search=${search}`);
             //headers --> মেথড কে axiosSecure এর ভিতরে রাখা হয়েছে
             // এখানে const res এ headers এর ভিতরে authorization টোকেন না রেখে axiosSecure এর ভিতরে রেখেছি যাতে সব জায়গা হতে পাওয়া যায় ।
             return res.data;

@@ -16,7 +16,7 @@ const ContentManagement1 = () => {
 
     const { refetch, data: blogs = [] } = useQuery({
 
-        queryKey: [filter,'blogs'],
+        queryKey: [filter, 'blogs'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/blogs?filter=${filter}`)
             return res.data;
@@ -38,9 +38,9 @@ const ContentManagement1 = () => {
     return (
         <div className='p-24'>
             <h2 className='text-center font-bold pb-12 text-red-600 text-5xl'>Content Management</h2>
-            <div className='flex justify-between'>
+            <div className='flex items-center justify-between'>
 
-            <div className='pt-12'>
+                <div className=''>
                     <select defaultValue='default'
                         name='status'
                         id='status'
@@ -49,7 +49,7 @@ const ContentManagement1 = () => {
                         onChange={(e) => setFilter(e.target.value)}
                     >
                         <option disabled value='default'>Filter</option>
-                        
+
                         <option value='Draft'>Draft</option>
                         <option value='Published'>Published</option>
                     </select>
@@ -61,9 +61,8 @@ const ContentManagement1 = () => {
                     </Link>
                 </div>
 
-
-
             </div>
+
             <div className='grid gap-6 grid-cols-1 mt-12  md:grid-cols-2 lg:grid-cols-3'>
                 {
                     blogs.map(blog => <BlogCard key={blog._id} blog={blog} ></BlogCard>)
