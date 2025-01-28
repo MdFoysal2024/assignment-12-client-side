@@ -130,8 +130,8 @@ const AllUsers = () => {
     return (
         <div className='p-24'>
 
-            <div className='text-center text-4xl font-bold text-red-600'>
-                <p> All Users Details({users.length})</p>
+            <div className='text-center text-2xl md:text-4xl font-bold text-red-600'>
+                <p> All Users Details</p>
 
 
 

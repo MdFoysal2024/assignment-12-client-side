@@ -63,7 +63,7 @@ const FundingPage = () => {
 
 
     return (
-        <div className='container mx-auto py-24'>
+        <div className='container mx-auto py-24 px-12'>
 
             <Helmet>
                 <meta charSet="utf-8" />
@@ -72,7 +72,7 @@ const FundingPage = () => {
             </Helmet>
             <div className="text-center w-full md:w-1/2 mx-auto py-12">
 
-                <h2 className="text-5xl pb-6 font-bold text-red-600"> Fund For Organization</h2>
+                <h2 className=" text-3xl md:text-5xl pb-6 font-bold text-red-600"> Fund For Organization</h2>
                 <p className="text-gray-500">You are funding lifesaving resources and interventions sit amet consectetur adipisicing elit. Tempore perferendis provident necessitatibus hic eligendi autem.</p>
             </div>
 
@@ -86,7 +86,7 @@ const FundingPage = () => {
             {/* <button className="btn" onClick={() => document.getElementById('my_modal_4').showModal()}>Donate</button> */}
             <dialog id="my_modal_4" className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
-                    <div className="card bg-base-100 w-full max-w-sm shrink-0 ">
+                    <div className="card bg-base-100 w-full  shrink-0 ">
                         <form
                             onSubmit={handleFunding}
                             className="card-body">
@@ -217,7 +217,7 @@ const FundingPage = () => {
                         </table>
 
 
-                        <div className=" flex justify-between mt-6 mr-12">
+                        <div className=" flex justify-between mt-6 md:mr-12">
                             <div></div>
                             <div className=" border-t-2 border-red-600 md:mr-24 ">
                                 <h3 className="text-2xl font-bold text-red-600 "> <span>Total Amount: </span> ${stats?.revenue}</h3>

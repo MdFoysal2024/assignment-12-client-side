@@ -22,10 +22,10 @@ const VolunteerHome = () => {
     return (
         <div className=' p-6 md:p-24'>
             <div>
-                <div>
-                    <h2 className='text-4xl text-gray-600 font-bold'>Hi Welcome, <br /> <span className='text-red-600 text-6xl'>Dear, {user?.displayName}</span></h2>
+            <div>
+                        <h2 className=' text-2xl md:text-4xl text-gray-600 font-bold'>Hi Welcome, <br /> <span className='text-red-600 text-4xl md:text-6xl'>Dear, {user?.displayName}</span></h2>
 
-                </div>
+                    </div>
 
                 <div className='w-3/4'>
                     <p className='font-semibold py-6 text-xl '> Thank you for being the heart of this noble cause. Your leadership and dedication empower us to save lives and bring hope to those in need.</p>
@@ -55,35 +55,35 @@ const VolunteerHome = () => {
 
             <div className='grid gap-12 grid-cols-1 my-24 md:grid-cols-2 lg:grid-cols-3'>
                 <div className=' flex gap-6 rounded-lg bg-green-200 p-6 items-center'>
-                    <div className='text-8xl text-green-600'>
+                    <div className='text-7xl text-green-600'>
                         <BiSolidBadgeDollar />
                     </div>
 
                     <div>
                         <p className='text-gray-600  font-bold'>Total Donation Amount</p>
-                        <h2 className='font-extrabold text-6xl text-green-600 '>${stats?.revenue}</h2>
+                        <h2 className='font-extrabold text-4xl md:text-6xl text-green-600 '>${stats?.revenue}</h2>
 
                     </div>
                 </div>
                 <div className=' flex gap-6 rounded-lg bg-red-200 p-6 items-center'>
-                    <div className='text-8xl text-red-600'>
+                    <div className='text-7xl text-red-600'>
                         <BiSolidDonateBlood />
                     </div>
 
                     <div>
                         <p className='text-gray-600 font-bold'> Total Donation Request</p>
-                        <h2 className='font-extrabold text-6xl text-red-600  '>{stats?.bloodRequest}</h2>
+                        <h2 className='font-extrabold text-4xl md:text-6xl text-red-600  '>{stats?.bloodRequest}</h2>
 
                     </div>
                 </div>
                 <div className=' flex gap-6 rounded-lg bg-purple-200 p-6 items-center'>
-                    <div className='text-8xl text-purple-600'>
+                    <div className='text-7xl text-purple-600'>
                         <FaUsers />
                     </div>
 
                     <div>
                         <p className='text-gray-600 font-bold'>Total Donation Amount</p>
-                        <h2 className='font-extrabold px-6 text-6xl text-purple-600 '>${stats?.users}</h2>
+                        <h2 className='font-extrabold text-4xl md:text-6xl text-purple-600 '>${stats?.users}</h2>
 
                     </div>
                 </div>

@@ -119,7 +119,7 @@ const AllBloodDonationRequest = () => {
             <div className='p-24'>
                 <h2 className='text-center text-red-600 text-2xl md:text-4xl font-bold'>
 
-                    All Blood Donation Request({bloodRequestList.length})
+                    All Blood Donation Request
                 </h2>
 
                 <div className='pt-12'>

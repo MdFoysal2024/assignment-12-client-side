@@ -31,7 +31,7 @@ const BlogPage = () => {
 
     return (
 
-        <div className='container mx-auto py-24'>
+        <div className='container mx-auto py-24 px-12'>
             <div className='text-center text-3xl md:text-5xl font-bold text-red-600'>
                 <p>Blood Donation Blog </p>
             </div>

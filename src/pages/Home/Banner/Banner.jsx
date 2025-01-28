@@ -24,7 +24,7 @@ const Banner = () => {
                             </Link>
                             :
                             <Link to='/signUp'>
-                                <button className="btn border-none md:text-xl text-white  hover:bg-red-800 bg-red-600">Join as a donor</button>
+                                <button className="btn border-none md:text-xl text-white  hover:bg-red-800 bg-red-600">Join as a Donor</button>
                             </Link>
 
                         }

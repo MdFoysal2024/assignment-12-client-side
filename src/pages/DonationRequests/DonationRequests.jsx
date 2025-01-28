@@ -15,7 +15,7 @@ const DonationRequests = () => {
 
         queryKey: ['bloodRequestList'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/createDonationRequest')
+            const res = await axiosSecure.get('/createDonationRequestPublic')
             return res.data;
         }
 
@@ -33,13 +33,15 @@ const DonationRequests = () => {
 
     return (
         <div className='container mx-auto py-24'>
-            Donation Requests
 
 
+            <div className="text-3xl text-center md:text-5xl mt-12 text-red-600 font-bold">
+                <p>Blood Donation Requests</p>
+            </div>
 
             <div>
                 {
-                   donors.length ?
+                    donors.length ?
                         <> <div className="overflow-x-auto my-8">
                             <table className="table">
                                 {/* head */}

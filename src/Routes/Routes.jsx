@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
             {
                 path: 'search',
                 element: <SearchPage></SearchPage>,
-                loader:()=>fetch('http://localhost:5000/usersCount')
+                loader:()=>fetch('https://blood-donation-server-wine.vercel.app/usersCount')
             },
             {
                 path: 'funding',
@@ -116,7 +116,7 @@ export const router = createBrowserRouter([
 
                 path: 'editDonationRequest/:id',
                 element: <EditDonationRequest></EditDonationRequest>,
-                loader: ({ params }) => fetch(`http://localhost:5000/donationRequest/${params.id}`)
+                loader: ({ params }) => fetch(`https://blood-donation-server-wine.vercel.app/donationRequest/${params.id}`)
             },
             {
 
@@ -124,7 +124,7 @@ export const router = createBrowserRouter([
                 element: (<PrivateRoute>
                     <DonationRequestDetails></DonationRequestDetails>
                 </PrivateRoute>),
-                loader: ({ params }) => fetch(`http://localhost:5000/donationRequest/${params.id}`)
+                loader: ({ params }) => fetch(`https://blood-donation-server-wine.vercel.app/donationRequest/${params.id}`)
             },
 
 
@@ -157,7 +157,7 @@ export const router = createBrowserRouter([
             {
                 path: 'content-management',
                 element: <ContentManagement></ContentManagement>,
-                loader:()=>fetch('http://localhost:5000/blogs-count')
+                loader:()=>fetch('https://blood-donation-server-wine.vercel.app/blogs-count')
                
             },
             {
@@ -172,7 +172,7 @@ export const router = createBrowserRouter([
 
                 path: 'blogDetails/:id',
                 element: <BlogDetails></BlogDetails>,
-                loader: ({ params }) => fetch(`http://localhost:5000/blogs/${params.id}`)
+                loader: ({ params }) => fetch(`https://blood-donation-server-wine.vercel.app/blogs/${params.id}`)
             },
         ]
     }

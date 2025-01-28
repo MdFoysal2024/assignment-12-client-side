@@ -65,7 +65,7 @@ const Navbar = () => {
 
     return (
         <div className="  text-white ">
-            <div className="navbar fixed z-10 bg-opacity-30 px-40  bg-red-950  hover:text-opacity-100 ">
+            <div className="navbar fixed z-10 bg-opacity-30 px-16 md:px-24 lg:px-40  bg-red-950  hover:text-opacity-100 ">
                 <div className="navbar-start ">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

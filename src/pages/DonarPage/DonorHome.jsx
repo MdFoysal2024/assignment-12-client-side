@@ -97,7 +97,7 @@ const DonorHome = () => {
 
                 <div>
                     <div>
-                        <h2 className='text-4xl text-gray-600 font-bold'>Hi Welcome, <br /> <span className='text-red-600 text-6xl'>Dear, {user?.displayName}</span></h2>
+                        <h2 className=' text-2xl md:text-4xl text-gray-600 font-bold'>Hi Welcome, <br /> <span className='text-red-600 text-4xl md:text-6xl'>Dear, {user?.displayName}</span></h2>
 
                     </div>
 
