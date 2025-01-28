@@ -1,3 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.active {
+    font-weight: bold;
+    color: orangered;
+  }
+  
+  
+  .App {
+    display: flex;
+    justify-content: space-around;
+    font-family: sans-serif;
+    text-align: center;
+    padding-top: 40px;
+  }
+  
+  .time {
+    font-size: 32px;
+  }
+  
+  
+  
+  .pagination{
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .pagination .selected{
+    /* //background-color: rgb(152, 155, 155); */
+    background-color: rgb(243, 0, 0);
+    color: azure;
+    font-weight: 600;
+  }
+  .pagination button{
+    padding: 12px 16px;
+    margin-right: 16px;
+    border: none;
+    background-color: rgb(219, 219, 219);
+    border-radius: 5px;
+  }

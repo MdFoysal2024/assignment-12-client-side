@@ -5,7 +5,7 @@ const BlogCardPublic = ({blog}) => {
 
    const {_id, title, photo, status, content } = blog || {};
 
-
+//console.log(_id)
     const stripHtmlTags = (html) => {
         return html?.replace(/<\/?[^>]+(>|$)/g, "") || "";
       };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { FaUsers } from 'react-icons/fa6';
@@ -11,10 +11,10 @@ const AllUsers = () => {
     //custom hooks-->
     const axiosSecure = useAxiosSecure();
 
-
+    const [filter, setFilter] = useState('')
     const { refetch, data: users = [] } = useQuery({
 
-        queryKey: ['users'],
+        queryKey: [filter, 'users'],
         queryFn: async () => {
 
             //const res = await axiosSecure.get('/users')
@@ -30,7 +30,7 @@ const AllUsers = () => {
             // });
 
 
-            const res = await axiosSecure.get('/users');
+            const res = await axiosSecure.get(`/users?filter=${filter}`);
             //headers --> মেথড কে axiosSecure এর ভিতরে রাখা হয়েছে
             // এখানে const res এ headers এর ভিতরে authorization টোকেন না রেখে axiosSecure এর ভিতরে রেখেছি যাতে সব জায়গা হতে পাওয়া যায় ।
             return res.data;
@@ -129,8 +129,29 @@ const AllUsers = () => {
 
     return (
         <div className='p-24'>
-            All Users page ({users.length})
 
+            <div className='text-center text-4xl font-bold text-red-600'>
+                <p> All Users Details({users.length})</p>
+
+
+
+
+            </div>
+            
+                <div className='pt-12'>
+                    <select defaultValue='default'
+                        name='status'
+                        id='status'
+                        className="select select-bordered w-full max-w-xs"
+                        // onChange={(e)=>console.log(e.target.value)}
+                        onChange={(e) => setFilter(e.target.value)}
+                    >
+                        <option disabled value='default'>Filter</option>
+
+                        <option value='Active'>Active</option>
+                        <option value='Blocked'>Blocked</option>
+                    </select>
+                </div>
 
             <div>
                 {

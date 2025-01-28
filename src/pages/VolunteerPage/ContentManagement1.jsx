@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
@@ -11,12 +11,14 @@ const ContentManagement1 = () => {
     const axiosSecure = useAxiosSecure();
     //  const { user } = useAuth();
 
+    const [filter, setFilter] = useState('')
+    console.log(filter)
 
     const { refetch, data: blogs = [] } = useQuery({
 
-        queryKey: ['blogs'],
+        queryKey: [filter,'blogs'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/blogs')
+            const res = await axiosSecure.get(`/blogs?filter=${filter}`)
             return res.data;
         }
 
@@ -38,13 +40,20 @@ const ContentManagement1 = () => {
             <h2 className='text-center font-bold pb-12 text-red-600 text-5xl'>Content Management</h2>
             <div className='flex justify-between'>
 
-                <div>
+            <div className='pt-12'>
                     <select defaultValue='default'
-                        className="select select-bordered w-full max-w-xs">
+                        name='status'
+                        id='status'
+                        className="select select-bordered w-full max-w-xs"
+                        // onChange={(e)=>console.log(e.target.value)}
+                        onChange={(e) => setFilter(e.target.value)}
+                    >
                         <option disabled value='default'>Filter</option>
-                        <option>Draft</option>
-                        <option>Published</option>
-                    </select></div>
+                        
+                        <option value='Draft'>Draft</option>
+                        <option value='Published'>Published</option>
+                    </select>
+                </div>
 
                 <div>
                     <Link to='/dashboard/addBlog'>

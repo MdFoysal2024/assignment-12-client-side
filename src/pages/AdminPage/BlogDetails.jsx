@@ -3,9 +3,9 @@ import { useLoaderData } from 'react-router-dom';
 
 const BlogDetails = () => {
     const blogData = useLoaderData()
-    console.log(blogData)
+   console.log(blogData )
     const { _id, title, photo, status, content } = blogData || {};
-
+    console.log(_id)
     const stripHtmlTags = (html) => {
         return html?.replace(/<\/?[^>]+(>|$)/g, "") || "";
     };

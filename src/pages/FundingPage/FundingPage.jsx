@@ -217,12 +217,12 @@ const FundingPage = () => {
                         </table>
 
 
-                        {/* <div className=" flex justify-between mt-6 mr-12">
+                        <div className=" flex justify-between mt-6 mr-12">
                             <div></div>
                             <div className=" border-t-2 border-red-600 md:mr-24 ">
-                                <h3 className="text-2xl font-bold text-red-600 "> <span>Total Amount: </span> ${stats.revenue}</h3>
+                                <h3 className="text-2xl font-bold text-red-600 "> <span>Total Amount: </span> ${stats?.revenue}</h3>
                             </div>
-                        </div> */}
+                        </div>
                     </div>
 
                         :

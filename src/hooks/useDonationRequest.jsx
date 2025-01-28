@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useAxiosSecure from './useAxiosSecure';
 import useAuth from './useAuth';
 import { useQuery } from '@tanstack/react-query';
@@ -9,12 +9,13 @@ const useDonationRequest = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
 
+    const [filter, setFilter] = useState('')
     const { refetch, data: donationRequest = [] } = useQuery({
 
 
-        queryKey: ['donationRequest', user?.email],
+        queryKey: [filter,'donationRequest', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/donationRequest?email=${user.email}`)
+            const res = await axiosSecure.get(`/donationRequest?email=${user.email}&filter=${filter}`)
             return res.data;
         }
 

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
@@ -14,12 +14,15 @@ const AllBloodDonationRequest = () => {
     //custom hooks-->
     const axiosSecure = useAxiosSecure();
     //  const { user } = useAuth();
+    const [filter, setFilter] = useState('')
+
+    // console.log(filter)
 
     const { refetch, data: bloodRequestList = [] } = useQuery({
 
-        queryKey: ['bloodRequestList'],
+        queryKey: [filter, 'bloodRequestList'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/createDonationRequest')
+            const res = await axiosSecure.get(`/createDonationRequest?filter=${filter}`)
             return res.data;
         }
 
@@ -62,7 +65,7 @@ const AllBloodDonationRequest = () => {
 
     }
 
- const handleRequestDone = request => {
+    const handleRequestDone = request => {
         //console.log(user);
         //console.log('User Admin creation Functionality start', user._id)
         axiosSecure.patch(`/donationRequest/done/${request._id}`)
@@ -121,12 +124,17 @@ const AllBloodDonationRequest = () => {
 
                 <div className='pt-12'>
                     <select defaultValue='default'
-                        className="select select-bordered w-full max-w-xs">
+                        name='status'
+                        id='status'
+                        className="select select-bordered w-full max-w-xs"
+                        // onChange={(e)=>console.log(e.target.value)}
+                        onChange={(e) => setFilter(e.target.value)}
+                    >
                         <option disabled value='default'>Filter</option>
-                        <option>pending</option>
-                        <option>inprogress</option>
-                        <option>done</option>
-                        <option>canceled</option>
+                        <option value='pending'>pending</option>
+                        <option value='inprogress'>inprogress</option>
+                        <option value='Done'>Done</option>
+                        <option value='Canceled'>Canceled</option>
                     </select>
                 </div>
 
@@ -227,7 +235,7 @@ const AllBloodDonationRequest = () => {
                                                     {
                                                         request.status === 'pending' ?
                                                             <> <p className='text-red-600 font-semibold bg-red-300 px-2 text-center '>{request.status}</p></>
-                                                            : request.status === 'Cancel' ?
+                                                            : request.status === 'Canceled' ?
                                                                 <>
                                                                     <p className='text-red-600 font-semibold bg-red-300 px-2 text-center '>{request.status}</p>
                                                                 </> :
@@ -238,66 +246,64 @@ const AllBloodDonationRequest = () => {
                                                 <th>
 
 
-<div className="dropdown dropdown-end">
-    <div tabIndex={0} role="button" className="btn m-1">Click Me</div>
-    <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-        <li>
-            <Link to={`/dashboard/editDonationRequest/${request._id}`}>
-                <button
+                                                    <div className="dropdown dropdown-end">
+                                                        <div tabIndex={0} role="button" className="btn m-1">Click Me</div>
+                                                        <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                                                            <li>
+                                                                <Link to={`/dashboard/editDonationRequest/${request._id}`}>
+                                                                    <button
 
-                    className=" p-3 text-xl text-green-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><BiEdit /></button>
-            </Link>
-        </li>
-        <li>
-            <button
-                onClick={() => handleDeleteRequest(request)}
-                className=" ml-2 p-3 text-xl text-red-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><RiDeleteBin2Fill />
-            </button>
+                                                                        className=" p-3 text-xl text-green-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><BiEdit /></button>
+                                                                </Link>
+                                                            </li>
+                                                            <li>
+                                                                <button
+                                                                    onClick={() => handleDeleteRequest(request)}
+                                                                    className=" ml-2 p-3 text-xl text-red-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><RiDeleteBin2Fill />
+                                                                </button>
 
-        </li>
-        <li>
-            <Link to={`/dashboard/donationRequestDetails/${request._id}`}>
-                <button
+                                                            </li>
+                                                            <li>
+                                                                <Link to={`/dashboard/donationRequestDetails/${request._id}`}>
+                                                                    <button
 
-                    className=" p-3 text-xl text-purple-500-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><BsEye /></button>
-            </Link>
-        </li>
-
-
-
-        {
-            request.status === 'inprogress' ?
-                <>
-                    <li><button
-                        onClick={() => handleRequestDone(request)}
-                        className=" ml-2 p-3 text-xl text-green-600 border-2 mb-2 border-gray-300 rounded-full hover:bg-slate-300"> Done
-                    </button></li>
-                </>
-                :
-                <>
-                </>
-        }
-        {
-            request.status === 'inprogress' ?
-                <>
-                    <li><button
-                        onClick={() => handleRequestCancel(request)}
-                        className=" ml-2 p-3 text-xl text-red-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"> Cancel
-                    </button></li>
-                </>
-                :
-                <>
-                </>
-        }
+                                                                        className=" p-3 text-xl text-purple-500-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"><BsEye /></button>
+                                                                </Link>
+                                                            </li>
 
 
 
+                                                            {
+                                                                request.status === 'inprogress' ?
+                                                                    <>
+                                                                        <li><button
+                                                                            onClick={() => handleRequestDone(request)}
+                                                                            className=" ml-2 p-3 text-xl text-green-600 border-2 mb-2 border-gray-300 rounded-full hover:bg-slate-300"> Done
+                                                                        </button></li>
+                                                                    </>
+                                                                    :
+                                                                    <>
+                                                                    </>
+                                                            }
+                                                            {
+                                                                request.status === 'inprogress' ?
+                                                                    <>
+                                                                        <li><button
+                                                                            onClick={() => handleRequestCancel(request)}
+                                                                            className=" ml-2 p-3 text-xl text-red-600 border-2 border-gray-300 rounded-full hover:bg-slate-300"> Cancel
+                                                                        </button></li>
+                                                                    </>
+                                                                    :
+                                                                    <>
+                                                                    </>
+                                                            }
 
 
-    </ul>
-</div>
 
 
+
+                                                        </ul>
+                                                    </div>
 
 
 
@@ -307,7 +313,9 @@ const AllBloodDonationRequest = () => {
 
 
 
-</th>
+
+
+                                                </th>
                                             </tr>)
                                         }
 

@@ -181,20 +181,20 @@ const BlogCard = ({ blog, refetch }) => {
                     <div className=" flex flex-col gap-4 items-center lg:flex-row   mt-6 justify-between ">
 
 
-                    {
-                            userInfo.role === 'Active' ?
+                        {
+                            userInfo.role === 'Admin' ?
                                 <>
-                                 {
-                            status === 'Published' ?
-                                <><button
-                                    onClick={() => handleBlogUnpublished(blog)}
-                                    className=" text-green-700 font-semibold px-6 text-lg bg-green-300">Unpublished</button></>
-                                :
-                                <>
-                                    <button
-                                        onClick={() => handleBlogPublished(blog)}
-                                        className=" text-green-700 font-semibold px-2 text-lg bg-green-300">Published</button></>
-                        }   
+                                    {
+                                        status === 'Published' ?
+                                            <><button
+                                                onClick={() => handleBlogUnpublished(blog)}
+                                                className=" text-green-700 font-semibold px-6 text-lg bg-green-300">Unpublished</button></>
+                                            :
+                                            <>
+                                                <button
+                                                    onClick={() => handleBlogPublished(blog)}
+                                                    className=" text-green-700 font-semibold px-2 text-lg bg-green-300">Published</button></>
+                                    }
                                 </>
                                 :
                                 <></>
@@ -204,7 +204,7 @@ const BlogCard = ({ blog, refetch }) => {
 
 
 
-                        
+
 
                         <Link to={`/dashboard/blogDetails/${_id}`}>
 
@@ -213,7 +213,7 @@ const BlogCard = ({ blog, refetch }) => {
 
 
                         {
-                            userInfo.role === 'Active' ?
+                            userInfo.role === 'Admin' ?
                                 <>
                                     <button
                                         onClick={() => handleDeleteBlog(blog)}

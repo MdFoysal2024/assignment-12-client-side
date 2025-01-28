@@ -3,19 +3,72 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import DonorCard from './DonorCard';
 import { FaSearch } from 'react-icons/fa';
+import { useLoaderData } from 'react-router-dom';
+import { FaArrowLeftLong, FaArrowRightLong } from 'react-icons/fa6';
 
 const SearchPage = () => {
+
+
+    //--------pagination start from here------->
+
+    //total number of marathon get from server side
+    const { usersCount } = useLoaderData()
+    console.log(usersCount)
+
+    const [itemsPerPage, setItemsPerPage] = useState(6)
+
+    const [currentPage, setCurrentPage] = useState(0)
+
+    const numberOfPages = Math.ceil(usersCount / itemsPerPage);
+
+    const pages = [...Array(numberOfPages).keys()];
+    console.log(pages)
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //Prev Page btn functionality-->
+
+    const handlePrevPage = () => {
+        if (currentPage > 0) {
+            setCurrentPage(currentPage - 1)
+        }
+    }
+
+
+    //Next Page btn functionality-->
+
+    const handleNextPage = () => {
+        if (currentPage < pages.length - 1) {
+            // pages.length-1 -->  -1  না দিয়ে একটা পেইজ অতিরিক্ত চলে যায়
+            setCurrentPage(currentPage + 1)
+        }
+    }
+
+
+
+
+    //--------pagination end here------->
 
 
     const [donorList, setDonorList] = useState()
 
     //custom hooks-->
     const axiosSecure = useAxiosSecure();
-
+    const [search, setSearch] = useState('');
 
     const { refetch, data: users = [] } = useQuery({
 
-        queryKey: ['users'],
+        queryKey: [currentPage, itemsPerPage, 'users'],
         queryFn: async () => {
 
             //const res = await axiosSecure.get('/users')
@@ -31,7 +84,7 @@ const SearchPage = () => {
             // });
 
 
-            const res = await axiosSecure.get('/users');
+            const res = await axiosSecure.get(`/usersDonor?page=${currentPage}&size=${itemsPerPage}`);
             //headers --> মেথড কে axiosSecure এর ভিতরে রাখা হয়েছে
             // এখানে const res এ headers এর ভিতরে authorization টোকেন না রেখে axiosSecure এর ভিতরে রেখেছি যাতে সব জায়গা হতে পাওয়া যায় ।
             return res.data;
@@ -46,14 +99,14 @@ const SearchPage = () => {
     // setDonorList(donors)
 
 
-    const donors = users.filter(user => user.role === 'Donor');
+    // const donors = users.filter(user => user.role === 'Donor');
 
-    console.log(donors);
+    // console.log(donors);
 
 
     return (
         <div className='container mx-auto py-24 px-12'>
-           
+
 
 
             <div className='text-center text-3xl py-4 md:text-5xl font-bold text-red-600'>
@@ -79,17 +132,60 @@ const SearchPage = () => {
             </div>
 
 
+            <div>
 
-            {
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                {
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                        {
+                            users.map(donor => <DonorCard
+                                key={donor._id}
+                                donor={donor}
+                            ></DonorCard>)
+                        }
+                    </div>
+                }
+            </div>
+            {/* //--------pagination start from here-------> */}
+
+            <div className='flex justify-center my-12 items-center gap-4'>
+                {/* <p>Pagination</p> */}
+
+
+
+                <button
+                    className='pagination mr-6 text-red-600'
+                    onClick={handlePrevPage}><FaArrowLeftLong /></button>
+
+                <div className='pagination'>
                     {
-                        donors.map(donor => <DonorCard
-                            key={donor._id}
-                            donor={donor}
-                        ></DonorCard>)
+                        pages.map((page, indx) =>
+
+                            <button
+                                key={page}
+                                // key={indx}
+                                //Click করলে setCurrentPage এর ভিতরে page এর মান সেট হবে।
+                                onClick={() => setCurrentPage(page)}
+                                className={currentPage === page && 'selected'}
+
+
+                            //page + 1 -->0 থেকে শুরু না হয়ে 1 থেকে শুরু হবে।
+                            >{page + 1}</button>
+                        )
                     }
                 </div>
-            }
+
+                <button
+                    className='pagination  text-red-600'
+                    onClick={handleNextPage}><FaArrowRightLong /></button>
+
+
+
+
+            </div>
+
+
+
+
 
         </div>
     );

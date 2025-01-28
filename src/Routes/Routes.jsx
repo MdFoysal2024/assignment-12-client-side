@@ -52,7 +52,8 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'search',
-                element: <SearchPage></SearchPage>
+                element: <SearchPage></SearchPage>,
+                loader:()=>fetch('http://localhost:5000/usersCount')
             },
             {
                 path: 'funding',
@@ -138,7 +139,8 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'volunteer/content-management',
-                element: <ContentManagement1></ContentManagement1>
+                element: <ContentManagement1></ContentManagement1>,
+
             },
 
 
@@ -154,7 +156,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'content-management',
-                element: <ContentManagement></ContentManagement>
+                element: <ContentManagement></ContentManagement>,
+                loader:()=>fetch('http://localhost:5000/blogs-count')
+               
             },
             {
                 path: 'all-blood-donation-request',

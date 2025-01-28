@@ -7,12 +7,33 @@ import { Link } from "react-router-dom";
 import { BsEye } from "react-icons/bs";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
 
 const MyDonationRequests = () => {
 
     // custom hooks-->
-    const [donationRequest, refetch] = useDonationRequest();
-    const axiosSecure = useAxiosSecure()
+    // const [donationRequest, refetch, setFilter] = useDonationRequest();
+    // const axiosSecure = useAxiosSecure()
+
+
+    const axiosSecure = useAxiosSecure();
+    const { user } = useAuth();
+
+    const [filter, setFilter] = useState('')
+    console.log(filter)
+
+    const { refetch, data: donationRequest = [] } = useQuery({
+
+
+        queryKey: [filter, 'donationRequest', user?.email],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/donationRequest?email=${user.email}&filter=${filter}`)
+            return res.data;
+        }
+
+    })
+
 
 
     const handleDeleteRequest = (request) => {
@@ -100,12 +121,17 @@ const MyDonationRequests = () => {
                 </div>
                 <div className='pt-12'>
                     <select defaultValue='default'
-                        className="select select-bordered w-full max-w-xs">
+                        name='status'
+                        id='status'
+                        className="select select-bordered w-full max-w-xs"
+                        // onChange={(e)=>console.log(e.target.value)}
+                        onChange={(e) => setFilter(e.target.value)}
+                    >
                         <option disabled value='default'>Filter</option>
-                        <option>pending</option>
-                        <option>inprogress</option>
-                        <option>done</option>
-                        <option>canceled</option>
+                        <option value='pending'>pending</option>
+                        <option value='inprogress'>inprogress</option>
+                        <option value='Done'>Done</option>
+                        <option value='Canceled'>Canceled</option>
                     </select>
                 </div>
 
@@ -201,7 +227,7 @@ const MyDonationRequests = () => {
                                                     {
                                                         request.status === 'pending' ?
                                                             <> <p className='text-red-600 font-semibold bg-red-300 px-2 text-center '>{request.status}</p></>
-                                                            : request.status === 'Cancel' ?
+                                                            : request.status === 'Canceled' ?
                                                                 <>
                                                                     <p className='text-red-600 font-semibold bg-red-300 px-2 text-center '>{request.status}</p>
                                                                 </> :
