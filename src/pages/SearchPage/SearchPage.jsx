@@ -66,7 +66,7 @@ const SearchPage = () => {
     const axiosSecure = useAxiosSecure();
     const [search, setSearch] = useState('');
     console.log(search)
-    
+
     const { refetch, data: users = [] } = useQuery({
 
         queryKey: [search, currentPage, itemsPerPage, 'users'],
@@ -111,7 +111,7 @@ const SearchPage = () => {
 
 
             <div className='text-center text-3xl py-4 md:text-5xl font-bold text-red-600'>
-                <p> Search Your Donor </p>
+                <p> Search Your Donor By District </p>
             </div>
 
             <div className='flex justify-center my-8'>

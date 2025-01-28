@@ -2,7 +2,7 @@ import React from 'react';
 import bgImg from '../../../images/blood_image.jpg'
 const ContactForm = () => {
     return (
-        <div className='my-24'>
+        <div className='my-32'>
             {/* Extra Section */}
             <div
                 className="hero  bg-fixed "

@@ -99,7 +99,7 @@ const ContentManagement = () => {
             <h2 className='text-center font-bold pb-12 text-red-600 text-3xl md:text-5xl'>Content Management</h2>
             <div className='flex justify-between p-4 items-center'>
 
-            <div className='pt-12'>
+            <div className=''>
                     <select defaultValue='default'
                         name='status'
                         id='status'

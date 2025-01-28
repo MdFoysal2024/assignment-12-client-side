@@ -33,7 +33,7 @@ const Footer = () => {
                                 </h2>
                             </a>
                         </div>
-                        <p className='lg:text-left pt-4  text-gray-400'>MarathonEvent.com - the complete marathon resource and community. Complete directory of marathons, marathon results, athlete and race news, marathon history. </p>
+                        <p className='lg:text-left pt-4  text-gray-400'>Donating blood today? Complete your pre-reading and health history questions online using any device, before visiting your blood drive location. </p>
 
                         <div className='flex cursor-pointer gap-4 text-4xl justify-center lg:justify-start py-4'>
                             <IoLogoTwitter className='text-red-950 bg-white p-2 rounded-full' />

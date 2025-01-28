@@ -95,36 +95,43 @@ const DonorHome = () => {
 
             <div className="p-12">
 
-            <div className='py-12'>
-                <h2 className=' text-2xl md:text-4xl font-bold'>Hi Welcome,  <span className='text-red-600'>{user?.displayName}</span></h2>
+                <div>
+                    <div>
+                        <h2 className='text-4xl text-gray-600 font-bold'>Hi Welcome, <br /> <span className='text-red-600 text-6xl'>Dear, {user?.displayName}</span></h2>
 
-            </div>
-            <div className='w-3/4'>
-                <p className='font-semibold py-6 text-xl '> Thank you for being the heart of this noble cause. Your leadership and dedication empower us to save lives and bring hope to those in need.</p>
-                <p> This platform is designed to make managing donations effortless and impactful. Here, you can:</p>
-                <ul className='pl-4 text-gray-500 py-4'>
-                    <li>
-                        * Track donations and campaigns in real time.
-                    </li>
-                    <li>
-                        * Engage with donors and volunteers.
-                    </li>
-                    <li>
-                        * Share stories of hope and transformation.
-                    </li>
-                </ul>
+                    </div>
+
+                    <div className='w-3/4'>
+                        <p className='font-semibold py-6 text-xl '> Thank you for being the heart of this noble cause. Your leadership and dedication empower us to save lives and bring hope to those in need.</p>
+                        <div className="text-gray-500">
+
+                            <p> This platform is designed to make managing donations effortless and impactful. Here, you can:</p>
+                            <ul className='pl-4 py-4'>
+                                <li>
+                                    * Track donations and campaigns in real time.
+                                </li>
+                                <li>
+                                    * Engage with donors and volunteers.
+                                </li>
+                                <li>
+                                    * Share stories of hope and transformation.
+                                </li>
+                            </ul>
 
 
-                <p>Together, lets make a difference and build a community of kindness. If you need assistance or have suggestions, we are here to support you every step of the way.</p>
-            </div>
+                            <p>Together, lets make a difference and build a community of kindness. If you need assistance or have suggestions, we are here to support you every step of the way.</p>
+                        </div>
+                    </div>
+
+                </div>
 
                 <div className='my-12'>
                     <h2 className="text-center text-red-600 font-bold text-3xl">
-                        Donation Requests 
+                        My Donation Requests
 
                     </h2>
                 </div>
-                
+
 
                 <div>
                     {

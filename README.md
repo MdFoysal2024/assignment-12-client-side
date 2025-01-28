@@ -1,8 +1,26 @@
-# React + Vite
+Website Name: BLOOD FOR LIFE Project.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Project Live site URL:
 
-Currently, two official plugins are available:
+FireBase Hosting URL: 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+Website Feature:
+
+Home Page
+Header Section
+Navigation Menu
+Banner Section
+Dynamic Card Section
+Admin, Volunteer, Donor Profile
+Footer Section
+CRUD Operation Functionality
+Responsive Design
+Firebase Authentication
+JWT Authentication
+Stripe Payment Gateway
+
+
+
+Used Many React npm packages
+like react-datepicker,daisyui, react framer motion, Animation etc.

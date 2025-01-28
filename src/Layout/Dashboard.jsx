@@ -75,7 +75,7 @@ const Dashboard = () => {
                                     <NavLink to="/dashboard/volunteer/all-blood-donation-request">   <FaList className='text-xl' />All Blood Donation Request</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/dashboard/volunteer/content-management">   <MdBookmarks className='text-xl' />Content Management</NavLink>
+                                    <NavLink to="/dashboard/content-management">   <MdBookmarks className='text-xl' />Content Management</NavLink>
                                 </li>
 
                             
