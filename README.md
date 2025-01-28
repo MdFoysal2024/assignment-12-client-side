@@ -1,9 +1,8 @@
 Website Name: BLOOD FOR LIFE Project.
 
-Project Live site URL:
+Project Live site URL:https://brilliant-selkie-cdb084.netlify.app/
 
-FireBase Hosting URL: 
-
+FireBase Hosting URL:https://blood-donation-project-b1849.web.app 
 
 Website Feature:
 
